@@ -1,0 +1,24 @@
+// /** @type {import('tailwindcss').Config} */
+// export default {
+//   content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
+//   theme: {
+//     extend: {},
+//   },
+//   plugins: [],
+// };
+
+
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ["./index.html","./src/**/*.{js,jsx,ts,tsx}"],
+  theme: {
+    extend: {
+      fontFamily: {
+        pacifico: ["Pacifico", "cursive"], 
+        playfair: ['"Playfair Display"', "serif"], 
+        inter: ["Inter", "sans-serif"],
+      },
+    },
+  },
+  plugins: [],
+};
