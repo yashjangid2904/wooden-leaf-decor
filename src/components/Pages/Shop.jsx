@@ -79,11 +79,10 @@ export function ShopPage() {
                 <button
                   key={cat.id}
                   onClick={() => setSelectedCategory(cat.id)}
-                  className={`px-3 md:px-4 py-2 rounded-lg text-left transition-all text-sm md:text-base ${
-                    selectedCategory === cat.id
+                  className={`px-3 md:px-4 py-2 rounded-lg text-left transition-all text-sm md:text-base ${selectedCategory === cat.id
                       ? "bg-[#6B7F59] text-white shadow-md"
                       : "bg-white border border-[#F5F1E8] hover:bg-[#F5F1E8]"
-                  }`}
+                    }`}
                 >
                   {cat.name}
                 </button>
@@ -98,11 +97,10 @@ export function ShopPage() {
                 <button
                   key={range.id}
                   onClick={() => setPriceRange(range.id)}
-                  className={`px-3 md:px-4 py-2 rounded-lg text-left transition-all text-sm md:text-base ${
-                    priceRange === range.id
+                  className={`px-3 md:px-4 py-2 rounded-lg text-left transition-all text-sm md:text-base ${priceRange === range.id
                       ? "bg-[#6B7F59] text-white shadow-md"
                       : "bg-white border border-[#F5F1E8] hover:bg-[#F5F1E8]"
-                  }`}
+                    }`}
                 >
                   {range.name}
                 </button>
@@ -117,7 +115,7 @@ export function ShopPage() {
             Showing {filteredProducts.length} products
           </p>
 
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-8">
             {filteredProducts.map((product) => (
               <ProductCard
                 key={product.id}
@@ -130,8 +128,8 @@ export function ShopPage() {
           {filteredProducts.length === 0 && (
             <div className="text-center py-12 md:py-20">
               <p className="text-lg md:text-xl text-[#6B6B6B] font-serif">No products found matching your filters.</p>
-              <button 
-                onClick={() => {setSelectedCategory("all"); setPriceRange("all");}}
+              <button
+                onClick={() => { setSelectedCategory("all"); setPriceRange("all"); }}
                 className="mt-4 text-[#6B7F59] font-bold hover:underline text-sm md:text-base"
               >
                 Clear all filters
@@ -142,7 +140,7 @@ export function ShopPage() {
       </section>
 
       {/* Product Details Modal */}
-      <ProductDetailsModal 
+      <ProductDetailsModal
         product={selectedProduct}
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}

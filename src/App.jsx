@@ -3,6 +3,7 @@ import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
 import { EcoCredentials } from "./components/EcoCredentials";
 import { ProductSpotlight } from "./components/ProductSpotlight";
+import { ParallaxBanner } from "./components/ParallaxBanner";
 import { InstagramSection } from "./components/InstagramSection";
 import { Footer } from "./components/Footer";
 import { ShopPage } from "./components/Pages/Shop";
@@ -19,9 +20,11 @@ function Home() {
     <>
       <Hero />
       <ProductSpotlight />
-      <EcoCredentials />
-      
+      <ParallaxBanner />
+
+
       <ProductCategories />
+      {/* <EcoCredentials /> */}
       <InstagramSection />
     </>
   );
@@ -55,7 +58,7 @@ function App() {
                 </>
               }
             />
-           
+
           </Routes>
         </main>
         <Footer />

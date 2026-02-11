@@ -60,11 +60,11 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden bg-[#3E3832]">
+    <section className="relative h-screen min-h-[80vh] md:min-h-[600px] flex items-end md:items-center justify-center overflow-hidden bg-[#3E3832]">
       {/* 1. Permanent Image Fallback */}
-      <img 
-        src={placeholderImage} 
-        alt="" 
+      <img
+        src={placeholderImage}
+        alt=""
         className="absolute inset-0 w-full h-full object-cover z-0"
       />
 
@@ -84,13 +84,13 @@ export function Hero() {
       {/* 3. Fail-safe Loading Overlay (The "Curtain") */}
       <AnimatePresence>
         {!isPlaying && (
-          <motion.div 
+          <motion.div
             key="hero-curtain"
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8, ease: "easeInOut" }}
             className="absolute inset-0 bg-[#3E3832] z-20"
-            style={{ 
+            style={{
               backgroundImage: `url(${placeholderImage})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center'
@@ -103,7 +103,7 @@ export function Hero() {
       <div className="absolute top-0 left-0 w-full h-full bg-black/40 z-30" />
 
       {/* 5. Content Side */}
-      <div className="relative z-40 max-w-[1400px] mx-auto px-4 sm:px-6 py-12 md:py-24 text-center w-full">
+      <div className="relative z-40 max-w-[1400px] mx-auto px-4 sm:px-6 pb-24 pt-12 md:py-24 text-center w-full">
         <div className="max-w-3xl mx-auto space-y-6 md:space-y-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -111,7 +111,7 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <h1 className="font-playfair text-4xl sm:text-5xl md:text-7xl lg:text-8xl text-white leading-tight drop-shadow-lg">
-              Welcome to <br /> 
+              Welcome to <br />
               <span className="text-[#D4C7B0]">Wooden Leaf</span>
             </h1>
 
@@ -122,8 +122,8 @@ export function Hero() {
             </p>
 
             <div className="pt-8 md:pt-12">
-              <Link 
-                to="/shop" 
+              <Link
+                to="/shop"
                 className="inline-block font-inter bg-[#D4C7B0] text-[#3E3832] px-8 sm:px-10 py-3 sm:py-4 rounded-md text-base sm:text-lg font-semibold hover:bg-white transition-all transform hover:scale-105 shadow-xl"
               >
                 Shop Now

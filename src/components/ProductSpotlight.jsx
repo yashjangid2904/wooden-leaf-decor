@@ -12,7 +12,7 @@ export function ProductSpotlight() {
 
   // Take spotlight products (keeping the user's preferred IDs)
   const spotlightProducts = products
-    .filter((p) => [18,17, 22, 24, 28, 23, 21,26].includes(p.id))
+    .filter((p) => [18, 17, 22, 24, 28, 23, 21, 26].includes(p.id))
     .slice(0, 8); // Increased to 5 for a better accordion effect if data allows
 
   const handleProductClick = (product) => {
@@ -23,7 +23,7 @@ export function ProductSpotlight() {
   return (
     <section className="py-12 md:py-20 bg-[#FAF8F5] overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -43,33 +43,44 @@ export function ProductSpotlight() {
         <div className="flex flex-col lg:flex-row justify-center items-stretch gap-3 md:gap-4 h-auto lg:h-[450px]">
           {spotlightProducts.map((product, index) => {
             const isActive = activeIndex === index;
-            
+
             return (
               <motion.div
                 key={product.id}
                 layout
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ 
-                  duration: 0.5, 
+                viewport={{ once: true, margin: "-20%" }} // Trigger animation when 20% in view
+                transition={{
+                  duration: 0.5,
                   delay: index * 0.1,
                   layout: { type: "spring", stiffness: 300, damping: 30 }
                 }}
-                onMouseEnter={() => setActiveIndex(index)}
+                // Desktop: Hover to activate
+                onMouseEnter={() => {
+                  if (window.innerWidth >= 1024) { // lg breakpoint
+                    setActiveIndex(index);
+                  }
+                }}
+                // Mobile: Scroll to activate (center of screen)
+                onViewportEnter={() => {
+                  if (window.innerWidth < 1024) { // lg breakpoint
+                    setActiveIndex(index);
+                  }
+                }}
                 onClick={() => handleProductClick(product)}
                 className={`
                   relative cursor-pointer rounded-2xl overflow-hidden shadow-md group
                   transition-all duration-500 ease-in-out
-                  ${isActive 
-                    ? "w-full lg:w-[450px] ring-1 ring-[#6B7F59]/20" 
-                    : "w-full lg:w-[100px] opacity-80 hover:opacity-100"
+                  ${isActive
+                    ? "w-full lg:w-[450px] ring-1 ring-[#6B7F59]/20 h-[450px] md:h-[500px]" // Active: Tall on mobile, Wide on desktop
+                    : "w-full lg:w-[100px] opacity-80 hover:opacity-100 h-[120px]" // Inactive: Short on mobile, Narrow on desktop
                   }
-                  h-[300px] lg:h-full bg-white
+                  lg:h-full bg-white
                 `}
               >
                 {/* Background Image */}
-                <motion.div 
+                <motion.div
                   className="absolute inset-0 w-full h-full"
                   layoutId={`img-container-${product.id}`}
                 >
@@ -97,7 +108,7 @@ export function ProductSpotlight() {
                             ₹{product.price}
                           </span>
                         </div>
-                        
+
                         <div>
                           <h3 className="text-2xl md:text-3xl text-white font-playfair leading-tight">
                             {product.title}
@@ -131,14 +142,14 @@ export function ProductSpotlight() {
           })}
         </div>
 
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
           className="mt-16 text-center"
         >
-          <Link 
-            to="/shop" 
+          <Link
+            to="/shop"
             className="inline-flex items-center gap-3 text-[#6B7F59] font-semibold hover:text-[#3E3832] transition-all duration-300 group"
           >
             <span className="border-b-2 border-transparent group-hover:border-[#6B7F59] pb-0.5">
