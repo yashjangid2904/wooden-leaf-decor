@@ -1,24 +1,53 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import products from "./data/products";
 import { ProductDetailsModal } from "./ProductDetailsModal";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { motion, AnimatePresence } from "motion/react";
+import { motion } from "motion/react";
 
 export function ProductSpotlight() {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(1);
+  const cardRefs = useRef([]);
 
   // Take spotlight products (keeping the user's preferred IDs)
   const spotlightProducts = products
-    .filter((p) => [18, 17, 22, 24, 28, 23, 21, 26].includes(p.id))
-    .slice(0, 8); // Increased to 5 for a better accordion effect if data allows
+    .filter((p) => [18, 17, 22, 24, 23, 21, 26].includes(p.id))
+    .slice(0, 7);
 
   const handleProductClick = (product) => {
     setSelectedProduct(product);
     setIsModalOpen(true);
   };
+
+  // Mobile: IntersectionObserver to activate card when scrolled into view
+  const setCardRef = useCallback((el, index) => {
+    cardRefs.current[index] = el;
+  }, []);
+
+  useEffect(() => {
+    // Only apply on mobile (below lg breakpoint)
+    if (window.innerWidth >= 1024) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idx = Number(entry.target.dataset.index);
+            setActiveIndex(idx);
+          }
+        });
+      },
+      { threshold: 0.5 } // Activate when 50% visible
+    );
+
+    cardRefs.current.forEach((el) => {
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, [spotlightProducts.length]);
 
   return (
     <section className="py-12 md:py-20 bg-[#FAF8F5] overflow-hidden">
@@ -39,32 +68,19 @@ export function ProductSpotlight() {
           <div className="w-16 h-1 bg-[#6B7F59]/20 mx-auto rounded-full"></div>
         </motion.div>
 
-        {/* Horizontal Accordion Layout */}
-        <div className="flex flex-col lg:flex-row justify-center items-stretch gap-3 md:gap-4 h-auto lg:h-[450px]">
+        {/* Horizontal Accordion Layout — No framer layout animations to avoid flicker */}
+        <div className="relative flex flex-col lg:flex-row justify-center items-stretch gap-3 md:gap-4 h-auto lg:h-[450px]">
           {spotlightProducts.map((product, index) => {
             const isActive = activeIndex === index;
 
             return (
-              <motion.div
+              <div
                 key={product.id}
-                layout
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-20%" }} // Trigger animation when 20% in view
-                transition={{
-                  duration: 0.5,
-                  delay: index * 0.1,
-                  layout: { type: "spring", stiffness: 300, damping: 30 }
-                }}
+                ref={(el) => setCardRef(el, index)}
+                data-index={index}
                 // Desktop: Hover to activate
                 onMouseEnter={() => {
-                  if (window.innerWidth >= 1024) { // lg breakpoint
-                    setActiveIndex(index);
-                  }
-                }}
-                // Mobile: Scroll to activate (center of screen)
-                onViewportEnter={() => {
-                  if (window.innerWidth < 1024) { // lg breakpoint
+                  if (window.innerWidth >= 1024) {
                     setActiveIndex(index);
                   }
                 }}
@@ -73,63 +89,53 @@ export function ProductSpotlight() {
                   relative cursor-pointer rounded-2xl overflow-hidden shadow-md group
                   transition-all duration-500 ease-in-out
                   ${isActive
-                    ? "w-full lg:w-[450px] ring-1 ring-[#6B7F59]/20 h-[450px] md:h-[500px]" // Active: Tall on mobile, Wide on desktop
-                    : "w-full lg:w-[100px] opacity-80 hover:opacity-100 h-[120px]" // Inactive: Short on mobile, Narrow on desktop
+                    ? "w-full lg:w-[450px] ring-1 ring-[#6B7F59]/20 h-[450px] md:h-[500px]"
+                    : "w-full lg:w-[100px] opacity-80 hover:opacity-100 h-[120px]"
                   }
                   lg:h-full bg-white
                 `}
               >
-                {/* Background Image */}
-                <motion.div
-                  className="absolute inset-0 w-full h-full"
-                  layoutId={`img-container-${product.id}`}
-                >
+                {/* Background Image — plain div, no layout animations */}
+                <div className="absolute inset-0 w-full h-full">
                   <img
                     src={product.image}
                     alt={product.title}
                     className={`w-full h-full object-cover transition-transform duration-700 ${isActive ? 'scale-105' : 'scale-110 group-hover:scale-105'}`}
                   />
-                  <div className={`absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-500`} />
-                </motion.div>
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-500" />
+                </div>
 
-                {/* Expanded Content Overlay */}
-                <AnimatePresence mode="wait">
-                  {isActive && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 10 }}
-                      transition={{ duration: 0.4, delay: 0.2 }}
-                      className="absolute inset-0 flex flex-col justify-end p-6 md:p-8 bg-gradient-to-t from-black/80 via-black/20 to-transparent"
-                    >
-                      <div className="space-y-4">
-                        <div className="flex items-center justify-between">
-                          <span className="text-[#6B7F59] font-bold text-[10px] uppercase tracking-widest bg-white/95 px-3 py-1 rounded-full shadow-sm">
-                            ₹{product.price}
-                          </span>
-                        </div>
+                {/* Expanded Content Overlay — CSS transition instead of AnimatePresence */}
+                <div
+                  className={`absolute inset-0 flex flex-col justify-end p-6 md:p-8 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-all duration-500 ${isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
+                    }`}
+                >
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[#6B7F59] font-bold text-[10px] uppercase tracking-widest bg-white/95 px-3 py-1 rounded-full shadow-sm">
+                        ₹{product.price}
+                      </span>
+                    </div>
 
-                        <div>
-                          <h3 className="text-2xl md:text-3xl text-white font-playfair leading-tight">
-                            {product.title}
-                          </h3>
-                          <p className="text-white/80 text-sm font-inter mt-3 line-clamp-2 max-w-sm">
-                            {product.description}
-                          </p>
-                        </div>
+                    <div>
+                      <h3 className="text-2xl md:text-3xl text-white font-playfair leading-tight">
+                        {product.title}
+                      </h3>
+                      <p className="text-white/80 text-sm font-inter mt-3 line-clamp-2 max-w-sm">
+                        {product.description}
+                      </p>
+                    </div>
 
-                        <div className="pt-2">
-                          <button className="flex items-center gap-2 bg-[#6B7F59] text-white px-6 py-2.5 rounded-xl font-semibold hover:bg-[#5A6C4A] transition-all transform hover:translate-x-1 shadow-lg">
-                            Explore Details
-                            <ArrowRight size={18} />
-                          </button>
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                    <div className="pt-2">
+                      <button className="flex items-center gap-2 bg-[#6B7F59] text-white px-6 py-2.5 rounded-xl font-semibold hover:bg-[#5A6C4A] transition-all transform hover:translate-x-1 shadow-lg">
+                        Explore Details
+                        <ArrowRight size={18} />
+                      </button>
+                    </div>
+                  </div>
+                </div>
 
-                {/* Collapsed Label (Optional Vertical Text for Collapsed State) */}
+                {/* Collapsed Label (Vertical Text for Desktop Collapsed State) */}
                 {!isActive && (
                   <div className="absolute inset-0 hidden lg:flex items-center justify-center pointer-events-none">
                     <span className="rotate-90 text-white/40 font-playfair whitespace-nowrap text-sm tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -137,7 +143,7 @@ export function ProductSpotlight() {
                     </span>
                   </div>
                 )}
-              </motion.div>
+              </div>
             );
           })}
         </div>

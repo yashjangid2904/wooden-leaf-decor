@@ -32,37 +32,47 @@ function Home() {
 
 import { SignedIn, SignedOut, RedirectToSignIn } from "@clerk/clerk-react";
 
+import { useLocation } from "react-router-dom";
+
+function AppContent() {
+  const location = useLocation();
+  const showFooter = location.pathname !== "/shop";
+
+  return (
+    <CartProvider>
+      <Navbar />
+      <main>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/shop" element={<ShopPage />} />
+          <Route path="/collections" element={<CollectionsPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/sustainability" element={<SustainabilityPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route
+            path="/checkout"
+            element={
+              <>
+                <SignedIn>
+                  <CheckoutPage />
+                </SignedIn>
+                <SignedOut>
+                  <RedirectToSignIn />
+                </SignedOut>
+              </>
+            }
+          />
+        </Routes>
+      </main>
+      {showFooter && <Footer />}
+    </CartProvider>
+  );
+}
+
 function App() {
   return (
     <Router>
-      <CartProvider>
-        <Navbar />
-        <main>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/shop" element={<ShopPage />} />
-            <Route path="/collections" element={<CollectionsPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/sustainability" element={<SustainabilityPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route
-              path="/checkout"
-              element={
-                <>
-                  <SignedIn>
-                    <CheckoutPage />
-                  </SignedIn>
-                  <SignedOut>
-                    <RedirectToSignIn />
-                  </SignedOut>
-                </>
-              }
-            />
-
-          </Routes>
-        </main>
-        <Footer />
-      </CartProvider>
+      <AppContent />
     </Router>
   );
 }

@@ -10,13 +10,13 @@
 
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html","./src/**/*.{js,jsx,ts,tsx}"],
+  content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
       fontFamily: {
-        pacifico: ["Pacifico", "cursive"], 
-        playfair: ['"Playfair Display"', "serif"], 
-        inter: ["Inter", "sans-serif"],
+        pacifico: ["Pacifico", "cursive"],
+        playfair: ['"Fraunces"', "serif"],
+        inter: ["Outfit", "sans-serif"],
       },
     },
   },
