@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, { useState } from "react";
 import products from "./data/products";
 import { ProductDetailsModal } from "./ProductDetailsModal";
 import { ArrowRight } from "lucide-react";
@@ -8,8 +8,7 @@ import { motion } from "motion/react";
 export function ProductSpotlight() {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(1);
-  const cardRefs = useRef([]);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   // Take spotlight products (keeping the user's preferred IDs)
   const spotlightProducts = products
@@ -21,33 +20,7 @@ export function ProductSpotlight() {
     setIsModalOpen(true);
   };
 
-  // Mobile: IntersectionObserver to activate card when scrolled into view
-  const setCardRef = useCallback((el, index) => {
-    cardRefs.current[index] = el;
-  }, []);
 
-  useEffect(() => {
-    // Only apply on mobile (below lg breakpoint)
-    if (window.innerWidth >= 1024) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const idx = Number(entry.target.dataset.index);
-            setActiveIndex(idx);
-          }
-        });
-      },
-      { threshold: 0.5 } // Activate when 50% visible
-    );
-
-    cardRefs.current.forEach((el) => {
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
-  }, [spotlightProducts.length]);
 
   return (
     <section className="py-12 md:py-20 bg-[#FAF8F5] overflow-hidden">
@@ -76,15 +49,23 @@ export function ProductSpotlight() {
             return (
               <div
                 key={product.id}
-                ref={(el) => setCardRef(el, index)}
-                data-index={index}
                 // Desktop: Hover to activate
                 onMouseEnter={() => {
                   if (window.innerWidth >= 1024) {
                     setActiveIndex(index);
                   }
                 }}
-                onClick={() => handleProductClick(product)}
+                onClick={() => {
+                  if (window.innerWidth < 1024) {
+                    if (!isActive) {
+                      setActiveIndex(index);
+                    } else {
+                      handleProductClick(product);
+                    }
+                  } else {
+                    handleProductClick(product);
+                  }
+                }}
                 className={`
                   relative cursor-pointer rounded-2xl overflow-hidden shadow-md group
                   transition-all duration-500 ease-in-out
