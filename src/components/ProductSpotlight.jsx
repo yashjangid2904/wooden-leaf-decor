@@ -11,9 +11,9 @@ export function ProductSpotlight() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   // Take spotlight products (keeping the user's preferred IDs)
-  const spotlightProducts = products
-    .filter((p) => [18, 17, 22, 24, 23, 21, 26].includes(p.id))
-    .slice(0, 7);
+  const spotlightProducts = [18, 17, 22, 24, 23, 21, 26]
+    .map(id => products.find(p => p.id === id))
+    .filter(Boolean);
 
   const handleProductClick = (product) => {
     setSelectedProduct(product);
