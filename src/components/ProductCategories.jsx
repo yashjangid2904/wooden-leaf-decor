@@ -161,7 +161,7 @@ export function ProductCategories() {
 
           {/* Dot Grid - top left, slow floating animation */}
           <motion.svg
-            className="absolute top-[10%] left-[2%] w-12 h-12 lg:w-20 lg:h-20 text-[#6B7F59]/15 block pointer-events-none z-10"
+            className="absolute top-[10%] left-[2%] w-20 h-20 text-[#6B7F59]/15 hidden lg:block pointer-events-none"
             viewBox="0 0 80 80"
             animate={{ y: [0, -15, 0], rotate: [0, 5, 0] }}
             transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
@@ -176,7 +176,7 @@ export function ProductCategories() {
 
           {/* Spiral - mid left, slow rotation */}
           <motion.svg
-            className="absolute top-[30%] left-[1%] w-14 h-14 lg:w-24 lg:h-24 lg:left-[3%] text-[#D4C7B0]/20 block pointer-events-none z-10"
+            className="absolute top-[30%] left-[3%] w-24 h-24 text-[#D4C7B0]/20 hidden lg:block pointer-events-none"
             viewBox="0 0 100 100"
             animate={{ rotate: [0, 360] }}
             transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
@@ -193,7 +193,7 @@ export function ProductCategories() {
 
           {/* Leaf Branch - lower left, gentle sway */}
           <motion.svg
-            className="absolute top-[55%] left-0 w-16 h-16 lg:w-28 lg:h-28 lg:left-[1%] text-[#6B7F59]/12 block pointer-events-none z-10"
+            className="absolute top-[55%] left-[1%] w-28 h-28 text-[#6B7F59]/12 hidden lg:block pointer-events-none"
             viewBox="0 0 120 120"
             animate={{ rotate: [-5, 5, -5], x: [0, 5, 0] }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
@@ -212,7 +212,7 @@ export function ProductCategories() {
 
           {/* Circle Ring - bottom left, pulsing */}
           <motion.svg
-            className="absolute top-[78%] left-[2%] w-10 h-10 lg:w-16 lg:h-16 lg:left-[4%] text-[#D4C7B0]/15 block pointer-events-none z-10"
+            className="absolute top-[78%] left-[4%] w-16 h-16 text-[#D4C7B0]/15 hidden lg:block pointer-events-none"
             viewBox="0 0 60 60"
             animate={{ scale: [1, 1.15, 1], opacity: [0.4, 0.7, 0.4] }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
@@ -226,7 +226,7 @@ export function ProductCategories() {
 
           {/* Dot Cluster - top right, gentle drift */}
           <motion.svg
-            className="absolute top-[12%] right-[2%] w-14 h-14 lg:w-24 lg:h-24 text-[#D4C7B0]/18 block pointer-events-none z-10"
+            className="absolute top-[12%] right-[2%] w-24 h-24 text-[#D4C7B0]/18 hidden lg:block pointer-events-none"
             viewBox="0 0 100 100"
             animate={{ y: [0, 12, 0], x: [0, -5, 0] }}
             transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
@@ -244,7 +244,7 @@ export function ProductCategories() {
 
           {/* Spiral - mid right, reverse slow rotation */}
           <motion.svg
-            className="absolute top-[38%] right-[1%] w-12 h-12 lg:w-20 lg:h-20 lg:right-[3%] text-[#6B7F59]/15 block pointer-events-none z-10"
+            className="absolute top-[38%] right-[3%] w-20 h-20 text-[#6B7F59]/15 hidden lg:block pointer-events-none"
             viewBox="0 0 80 80"
             animate={{ rotate: [360, 0] }}
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
@@ -260,7 +260,7 @@ export function ProductCategories() {
 
           {/* Tangle / Abstract Lines - lower right, swaying */}
           <motion.svg
-            className="absolute top-[60%] right-0 w-16 h-16 lg:w-28 lg:h-28 lg:right-[1%] text-[#6B7F59]/10 block pointer-events-none z-10"
+            className="absolute top-[60%] right-[1%] w-28 h-28 text-[#6B7F59]/10 hidden lg:block pointer-events-none"
             viewBox="0 0 120 120"
             animate={{ rotate: [3, -3, 3], y: [0, -8, 0] }}
             transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
@@ -273,7 +273,7 @@ export function ProductCategories() {
 
           {/* Small Dot Ring - bottom right, pulsing */}
           <motion.svg
-            className="absolute top-[82%] right-[2%] w-10 h-10 lg:w-14 lg:h-14 lg:right-[5%] text-[#D4C7B0]/20 block pointer-events-none z-10"
+            className="absolute top-[82%] right-[5%] w-14 h-14 text-[#D4C7B0]/20 hidden lg:block pointer-events-none"
             viewBox="0 0 60 60"
             animate={{ scale: [1, 1.2, 1], rotate: [0, 45, 0] }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
@@ -294,7 +294,7 @@ export function ProductCategories() {
 
           {/* Terracotta Diamond - left side, rotating float */}
           <motion.svg
-            className="absolute top-[20%] left-[1%] w-10 h-10 lg:w-14 lg:h-14 lg:left-[5%] block pointer-events-none z-10"
+            className="absolute top-[20%] left-[5%] w-14 h-14 hidden lg:block pointer-events-none"
             viewBox="0 0 60 60"
             animate={{ rotate: [0, 90, 180, 270, 360], y: [0, -10, 0] }}
             transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
@@ -305,7 +305,7 @@ export function ProductCategories() {
 
           {/* Amber Wavy Lines - left mid, gentle sway */}
           <motion.svg
-            className="absolute top-[42%] left-[2%] w-16 h-10 lg:w-24 lg:h-16 lg:left-[4%] block pointer-events-none z-10"
+            className="absolute top-[42%] left-[4%] w-24 h-16 hidden lg:block pointer-events-none"
             viewBox="0 0 100 60"
             animate={{ x: [0, 8, 0], opacity: [0.5, 0.8, 0.5] }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
@@ -317,7 +317,7 @@ export function ProductCategories() {
 
           {/* Sage Green Cross Star - left lower-mid, pulsing */}
           <motion.svg
-            className="absolute top-[65%] left-[3%] w-10 h-10 lg:w-16 lg:h-16 lg:left-[6%] block pointer-events-none z-10"
+            className="absolute top-[65%] left-[6%] w-16 h-16 hidden lg:block pointer-events-none"
             viewBox="0 0 60 60"
             animate={{ scale: [0.9, 1.1, 0.9], rotate: [0, 15, 0] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
@@ -329,7 +329,7 @@ export function ProductCategories() {
 
           {/* Coral Scattered Dots - left bottom area, drifting */}
           <motion.svg
-            className="absolute top-[88%] left-[1%] w-14 h-14 lg:w-20 lg:h-20 lg:left-[2%] block pointer-events-none z-10"
+            className="absolute top-[88%] left-[2%] w-20 h-20 hidden lg:block pointer-events-none"
             viewBox="0 0 80 80"
             animate={{ y: [0, -12, 0], x: [0, 6, 0] }}
             transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
@@ -344,7 +344,7 @@ export function ProductCategories() {
 
           {/* Olive Gold Hexagon - left side, slow spin */}
           <motion.svg
-            className="absolute top-[48%] left-0 w-10 h-10 lg:w-16 lg:h-16 lg:left-[1%] block pointer-events-none z-10"
+            className="absolute top-[48%] left-[1%] w-16 h-16 hidden lg:block pointer-events-none"
             viewBox="0 0 60 60"
             animate={{ rotate: [0, 360] }}
             transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
@@ -357,7 +357,7 @@ export function ProductCategories() {
 
           {/* Burnt Orange Flower - right top, blooming pulse */}
           <motion.svg
-            className="absolute top-[5%] right-[2%] w-14 h-14 lg:w-20 lg:h-20 lg:right-[4%] block pointer-events-none z-10"
+            className="absolute top-[5%] right-[4%] w-20 h-20 hidden lg:block pointer-events-none"
             viewBox="0 0 80 80"
             animate={{ scale: [0.85, 1.05, 0.85], rotate: [0, 20, 0] }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
@@ -381,7 +381,7 @@ export function ProductCategories() {
 
           {/* Teal Zigzag - right mid-top, sliding */}
           <motion.svg
-            className="absolute top-[25%] right-[2%] w-14 h-14 lg:w-20 lg:h-20 lg:right-[5%] block pointer-events-none z-10"
+            className="absolute top-[25%] right-[5%] w-20 h-20 hidden lg:block pointer-events-none"
             viewBox="0 0 80 80"
             animate={{ y: [0, 10, 0], opacity: [0.4, 0.7, 0.4] }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
@@ -393,7 +393,7 @@ export function ProductCategories() {
 
           {/* Warm Gold Triple Ring - right center, orbiting */}
           <motion.svg
-            className="absolute top-[50%] right-[2%] w-14 h-14 lg:w-18 lg:h-18 lg:right-[4%] block pointer-events-none z-10"
+            className="absolute top-[50%] right-[4%] w-18 h-18 hidden lg:block pointer-events-none"
             viewBox="0 0 70 70"
             animate={{ rotate: [0, -360] }}
             transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
@@ -406,7 +406,7 @@ export function ProductCategories() {
 
           {/* Earthy Red Abstract Curves - right lower, swaying */}
           <motion.svg
-            className="absolute top-[70%] right-[1%] w-16 h-16 lg:w-24 lg:h-24 lg:right-[2%] block pointer-events-none z-10"
+            className="absolute top-[70%] right-[2%] w-24 h-24 hidden lg:block pointer-events-none"
             viewBox="0 0 100 100"
             animate={{ rotate: [-4, 4, -4], x: [0, -6, 0] }}
             transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
@@ -419,7 +419,7 @@ export function ProductCategories() {
 
           {/* Moss Green Plus Signs - right bottom, floating */}
           <motion.svg
-            className="absolute top-[90%] right-[1%] w-14 h-14 lg:w-20 lg:h-20 lg:right-[3%] block pointer-events-none z-10"
+            className="absolute top-[90%] right-[3%] w-20 h-20 hidden lg:block pointer-events-none"
             viewBox="0 0 80 80"
             animate={{ y: [0, -15, 0], rotate: [0, 10, 0] }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}

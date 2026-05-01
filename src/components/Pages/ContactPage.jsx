@@ -20,15 +20,9 @@ export function ContactPage() {
 
   // --- Leaf Divider Component ---
   const LeafDivider = ({ align = "center" }) => (
-    <div
-      className={`flex items-center gap-3 ${align === "center" ? "justify-center" : "justify-start"}`}
-    >
+    <div className={`flex items-center gap-3 ${align === "center" ? "justify-center" : "justify-start"}`}>
       <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#C9BBA8]"></div>
-      <svg
-        className="w-4 h-4 text-[#8B6E4E] opacity-50"
-        viewBox="0 0 20 20"
-        fill="currentColor"
-      >
+      <svg className="w-4 h-4 text-[#8B6E4E] opacity-50" viewBox="0 0 20 20" fill="currentColor">
         <path d="M10 0 C4 6 4 14 10 20 C16 14 16 6 10 0 Z" />
       </svg>
       <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#C9BBA8]"></div>
@@ -36,11 +30,11 @@ export function ContactPage() {
   );
 
   // --- Shared input styling ---
-  const inputClass =
-    "w-full px-5 py-3.5 rounded-xl bg-[#FAF8F5] border-2 border-[#C9BBA8] focus:border-[#6B7F59] focus:outline-none focus:ring-2 focus:ring-[#6B7F59]/20 font-inter text-[#3E2E1E] placeholder-[#A49B8C] transition-colors duration-300";
+  const inputClass = "w-full px-5 py-3.5 rounded-xl bg-[#FAF8F5] border-2 border-[#C9BBA8] focus:border-[#6B7F59] focus:outline-none focus:ring-2 focus:ring-[#6B7F59]/20 font-inter text-[#3E2E1E] placeholder-[#A49B8C] transition-colors duration-300";
 
   return (
     <div className="min-h-screen bg-[#FAF8F5] relative overflow-hidden">
+
       {/* --- Background Texture (Global) --- */}
       <div className="fixed inset-0 opacity-[0.4] pointer-events-none z-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] mix-blend-overlay"></div>
 
@@ -79,6 +73,7 @@ export function ContactPage() {
       {/* ==================== CONTACT FORM & INFO ==================== */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
+
           {/* --- Contact Form (3 columns) --- */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -91,18 +86,14 @@ export function ContactPage() {
             <div className="absolute inset-0 opacity-[0.04] pointer-events-none mix-blend-multiply bg-[url('https://www.transparenttextures.com/patterns/wood-pattern.png')]"></div>
 
             <div className="relative z-10">
-              <h2 className="text-2xl md:text-3xl font-playfair text-[#3E2E1E] mb-1">
-                Send Us a Message
-              </h2>
+              <h2 className="text-2xl md:text-3xl font-playfair text-[#3E2E1E] mb-1">Send Us a Message</h2>
               <LeafDivider align="left" />
 
               <form onSubmit={handleSubmit} className="space-y-5 mt-6">
                 {/* Name & Email Row */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div>
-                    <label className="block mb-2 text-sm font-inter font-medium text-[#6B6B6B]">
-                      Name
-                    </label>
+                    <label className="block mb-2 text-sm font-inter font-medium text-[#6B6B6B]">Name</label>
                     <input
                       type="text"
                       value={formData.name}
@@ -115,9 +106,7 @@ export function ContactPage() {
                     />
                   </div>
                   <div>
-                    <label className="block mb-2 text-sm font-inter font-medium text-[#6B6B6B]">
-                      Email
-                    </label>
+                    <label className="block mb-2 text-sm font-inter font-medium text-[#6B6B6B]">Email</label>
                     <input
                       type="email"
                       value={formData.email}
@@ -133,9 +122,7 @@ export function ContactPage() {
 
                 {/* Subject */}
                 <div>
-                  <label className="block mb-2 text-sm font-inter font-medium text-[#6B6B6B]">
-                    Subject
-                  </label>
+                  <label className="block mb-2 text-sm font-inter font-medium text-[#6B6B6B]">Subject</label>
                   <select
                     value={formData.subject}
                     onChange={(e) =>
@@ -155,9 +142,7 @@ export function ContactPage() {
 
                 {/* Message */}
                 <div>
-                  <label className="block mb-2 text-sm font-inter font-medium text-[#6B6B6B]">
-                    Message
-                  </label>
+                  <label className="block mb-2 text-sm font-inter font-medium text-[#6B6B6B]">Message</label>
                   <textarea
                     rows={5}
                     value={formData.message}
@@ -180,10 +165,7 @@ export function ContactPage() {
                 >
                   <Send className="w-4 h-4" />
                   Send Message
-                  <ArrowRight
-                    size={16}
-                    className="group-hover:translate-x-1 transition-transform"
-                  />
+                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                 </button>
               </form>
             </div>
@@ -202,9 +184,7 @@ export function ContactPage() {
           >
             {/* Info Header */}
             <div className="mb-2">
-              <h2 className="text-2xl md:text-3xl font-playfair text-[#3E2E1E] mb-1">
-                Contact Information
-              </h2>
+              <h2 className="text-2xl md:text-3xl font-playfair text-[#3E2E1E] mb-1">Contact Information</h2>
               <LeafDivider align="left" />
             </div>
 
@@ -218,13 +198,17 @@ export function ContactPage() {
             <InfoCard
               icon={<Phone className="w-5 h-5" />}
               title="Phone"
-              text={["+91,7737863869", "Mon-Fri, 9am–5pm PST"]}
+              text={["+1 (555) 123-4567", "Mon-Fri, 9am–5pm PST"]}
             />
 
             <InfoCard
               icon={<MapPin className="w-5 h-5" />}
               title="Address"
-              text={["123 Forest Lane", "Portland, OR 97201", "United States"]}
+              text={[
+                "123 Forest Lane",
+                "Portland, OR 97201",
+                "United States",
+              ]}
             />
 
             <InfoCard
@@ -259,10 +243,7 @@ function InfoCard({ icon, title, text }) {
       <div className="relative z-10">
         <h3 className="font-playfair text-lg text-[#3E2E1E] mb-1">{title}</h3>
         {text.map((t, i) => (
-          <p
-            key={i}
-            className="text-[#6B6B6B] font-inter text-sm leading-relaxed"
-          >
+          <p key={i} className="text-[#6B6B6B] font-inter text-sm leading-relaxed">
             {t}
           </p>
         ))}
