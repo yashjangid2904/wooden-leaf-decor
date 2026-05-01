@@ -61,7 +61,6 @@ export function ShopPage() {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
-  const [visibleCount, setVisibleCount] = useState(8);
 
   const handleProductClick = (product) => {
     setSelectedProduct(product);
@@ -73,7 +72,7 @@ export function ShopPage() {
     { id: "home-decor", name: "Home Decor" },
     { id: "decorative-accents", name: "Decorative Accents" },
     { id: "wall-decor", name: "Wall Decor" },
-    { id: "shelves-hooks", name: "Shelves & Hooks" },
+    { id: "wall-shelves", name: "Shelves & Hooks" },
     { id: "tabletop-accents", name: "Tabletop Accents" },
     { id: "furniture", name: "Furniture" },
     { id: "kitchen-dining", name: "Kitchen & Dining" },
@@ -85,10 +84,10 @@ export function ShopPage() {
 
   const priceRanges = [
     { id: "all", name: "All Prices" },
-    { id: "under-500", name: "Under ₹500" },
-    { id: "500-1000", name: "₹500 - ₹1000" },
-    { id: "1000-2000", name: "₹1000 - ₹2000" },
-    { id: "over-2000", name: "Over ₹2000" },
+    { id: "under-50", name: "Under ₹50" },
+    { id: "50-100", name: "₹50 - ₹100" },
+    { id: "100-200", name: "₹100 - ₹200" },
+    { id: "over-200", name: "Over ₹200" },
   ];
 
   const filteredProducts = products.filter((product) => {
@@ -96,22 +95,15 @@ export function ShopPage() {
       selectedCategory === "all" || product.category === selectedCategory;
 
     let priceMatch = true;
-    if (priceRange === "under-500") priceMatch = product.price < 500;
-    else if (priceRange === "500-1000")
-      priceMatch = product.price >= 500 && product.price <= 1000;
-    else if (priceRange === "1000-2000")
-      priceMatch = product.price > 1000 && product.price <= 2000;
-    else if (priceRange === "over-2000") priceMatch = product.price > 2000;
+    if (priceRange === "under-50") priceMatch = product.price < 50;
+    else if (priceRange === "50-100")
+      priceMatch = product.price >= 50 && product.price <= 100;
+    else if (priceRange === "100-200")
+      priceMatch = product.price > 100 && product.price <= 200;
+    else if (priceRange === "over-200") priceMatch = product.price > 200;
 
     return categoryMatch && priceMatch;
   });
-
-  const visibleProducts = filteredProducts.slice(0, visibleCount);
-  const hasMore = visibleCount < filteredProducts.length;
-
-  const loadMore = () => {
-    setVisibleCount(prev => prev + 4);
-  };
 
   return (
     <div className="min-h-screen bg-[#FAF8F5] relative overflow-hidden">
@@ -275,9 +267,9 @@ export function ShopPage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-8 md:gap-8">
-              <AnimatePresence mode="popLayout">
-                {visibleProducts.map((product) => (
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-6 md:gap-8">
+              <AnimatePresence>
+                {filteredProducts.map((product) => (
                   <WoodProductCard
                     key={product.id}
                     {...product}
@@ -286,17 +278,6 @@ export function ShopPage() {
                 ))}
               </AnimatePresence>
             </div>
-
-            {hasMore && (
-              <div className="mt-16 text-center">
-                <button
-                  onClick={loadMore}
-                  className="px-10 py-4 bg-[#6B7F59] text-white rounded-2xl font-bold hover:bg-[#5A6C4A] transition-all transform hover:-translate-y-1 shadow-xl hover:shadow-[#6B7F59]/20"
-                >
-                  Load More Products
-                </button>
-              </div>
-            )}
 
             {filteredProducts.length === 0 && (
               <motion.div
