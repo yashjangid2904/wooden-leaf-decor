@@ -23,7 +23,7 @@ const products = [
     id: 3,
     image: "/floral-wood-slices.jpg",
     title: "Floral Painted Wood Slices",
-    price: 999,
+    price: 1000,
     category: "decorative-accents",
     badge: "New",
     description:
