@@ -178,7 +178,7 @@ const products = [
     category: "tabletop-accents",
     badge: "Art",
     description:
-      "A modern side table with a unique spiral staircase tunnel design. Perfect for contemporary living spaces."
+      "A modern side table with a unique spiral staircase tunnel design. Perfect for contemporary living spaces.",
   },
   {
     id: 19,
@@ -188,53 +188,8 @@ const products = [
     category: "wall-decor",
     badge: "Trending",
     description:
-      "Minimalist wall frame set with artistic patterns, perfect for enhancing modern living spaces."
+      "Minimalist wall frame set with artistic patterns, perfect for enhancing modern living spaces.",
   },
-  {
-    id: 21,
-    image: "/Turned Wooden Candle Holder Set.jpg",
-    title: "Turned Wooden Candle Holder Set",
-    price: 1299,
-    category: "decorative-accents",
-    badge: "New",
-    description: "Elegant handcrafted wooden candle holders that add a warm, rustic touch to any space."
-  },
-  {
-    id: 22,
-    image: "/Artisan Wooden Snack Tray Set.jpg",
-    title: "Artisan Wooden Snack Tray Set",
-    price: 1599,
-    category: "kitchen-dining",
-    badge: "Trending",
-    description: "Premium wooden tray set perfect for serving snacks or as a decorative tabletop piece."
-  },
-  {
-    id: 23,
-    image: "/Sculpted Ceramic Art Vase.jpg",
-    title: "Sculpted Ceramic Art Vase",
-    price: 2499,
-    category: "decorative-accents",
-    badge: "Premium",
-    description: "A unique, hand-sculpted vase that combines ceramic art with natural wood aesthetics."
-  },
-  {
-    id: 24,
-    image: "/Indoor Wooden Plant Stand Set.jpg",
-    title: "Indoor Wooden Plant Stand Set",
-    price: 1899,
-    category: "furniture",
-    badge: "Popular",
-    description: "Minimalist wooden plant stands designed to showcase your indoor greenery with style."
-  },
-  {
-    id: 26,
-    image: "/Wooden Serving Platter with Bowl.jpg",
-    title: "Wooden Serving Platter with Bowl",
-    price: 1699,
-    category: "kitchen-dining",
-    badge: "Premium",
-    description: "Elegant wooden platter featuring a built-in bowl, ideal for serving appetizers and dips."
-  }
 ];
 
 export default products;
