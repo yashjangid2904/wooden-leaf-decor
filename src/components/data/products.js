@@ -171,25 +171,25 @@ const products = [
       "Simple and elegant wooden hanging decor to warmly welcome guests.",
   },
   {
-    id: 18,
-    image: "/illusion-table.jpeg",
-    title: "Illusion Table",
-    price: 4999,
-    category: "tabletop-accents",
-    badge: "Art",
-    description:
-      "A modern side table with a unique spiral staircase tunnel design. Perfect for contemporary living spaces.",
+  id: 18,
+  image: "/illusion-table.jpeg",
+  title: "Illusion Table",
+  price: 4999,
+  category: "tabletop-accents",
+  badge: "Art",
+  description:
+    "A modern side table with a unique spiral staircase tunnel design. Perfect for contemporary living spaces."
   },
-  {
-    id: 19,
-    image: "/wall-art-frames.jpg",
-    title: "Decorative Wall Frame Set",
-    price: 799,
-    category: "wall-decor",
-    badge: "Trending",
-    description:
-      "Minimalist wall frame set with artistic patterns, perfect for enhancing modern living spaces.",
-  },
+ {
+  id: 19,
+  image: "/wall-art-frames.jpg",
+  title: "Decorative Wall Frame Set",
+  price: 799,
+  category: "wall-decor",
+  badge: "Trending",
+  description:
+    "Minimalist wall frame set with artistic patterns, perfect for enhancing modern living spaces."
+}
 ];
 
 export default products;
