@@ -175,16 +175,16 @@ export function AdminPanel({ isOpen, onClose }) {
             className="bg-[#FAF8F5] w-full max-w-5xl max-h-[90vh] rounded-3xl shadow-2xl flex flex-col overflow-hidden"
           >
             {/* Header */}
-            <div className="px-8 py-6 bg-[#F4EFE9] border-b border-[#E6E1D6] flex items-center justify-between">
+            <div className="px-5 md:px-8 py-4 md:py-6 bg-[#F4EFE9] border-b border-[#E6E1D6] flex items-center justify-between">
               <div>
-                <h2 className="font-playfair text-2xl text-[#5D4037]">Product Management</h2>
-                <p className="text-sm text-[#8B847C]">Manage your handcrafted collection</p>
+                <h2 className="font-playfair text-xl md:text-2xl text-[#5D4037]">CMS Panel</h2>
+                <p className="text-[10px] md:text-sm text-[#8B847C]">Manage handcrafted items</p>
               </div>
               <button 
                 onClick={onClose}
                 className="p-2 hover:bg-[#E6E1D6] rounded-full transition-colors text-[#5D4037]"
               >
-                <X size={24} />
+                <X size={20} className="md:w-6 md:h-6" />
               </button>
             </div>
 
@@ -192,66 +192,66 @@ export function AdminPanel({ isOpen, onClose }) {
             <div className="flex-1 overflow-hidden flex flex-col md:flex-row">
               {/* Left Side: Product List */}
               <div className="flex-1 flex flex-col border-r border-[#E6E1D6] overflow-hidden">
-                <div className="p-6 space-y-4 border-b border-[#E6E1D6] bg-white/50">
-                  <div className="flex gap-4">
+                <div className="p-4 md:p-6 space-y-4 border-b border-[#E6E1D6] bg-white/50">
+                  <div className="flex flex-col sm:flex-row gap-3">
                     <div className="relative flex-1">
-                      <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[#8B847C]" size={18} />
+                      <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[#8B847C]" size={16} />
                       <input 
                         type="text" 
-                        placeholder="Search products..."
+                        placeholder="Search..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className="w-full pl-10 pr-4 py-2.5 bg-[#FAF8F5] border border-[#E6E1D6] rounded-xl text-sm focus:outline-none focus:border-[#6B7F59] transition-colors"
+                        className="w-full pl-9 pr-4 py-2 bg-[#FAF8F5] border border-[#E6E1D6] rounded-xl text-sm focus:outline-none focus:border-[#6B7F59]"
                       />
                     </div>
                     <button 
                       onClick={() => handleOpenForm()}
-                      className="bg-[#6B7F59] text-white px-4 py-2.5 rounded-xl text-sm font-medium flex items-center gap-2 hover:bg-[#5A6C4A] transition-colors shadow-md"
+                      className="bg-[#6B7F59] text-white px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-[#5A6C4A] shadow-sm h-10 sm:h-auto"
                     >
-                      <Plus size={18} /> Add New
+                      <Plus size={16} /> Add Item
                     </button>
                   </div>
                 </div>
 
-                <div className="flex-1 overflow-y-auto p-6 space-y-3">
+                <div className="flex-1 overflow-y-auto p-4 md:p-6 space-y-2 md:space-y-3">
                   {loading && products.length === 0 ? (
                     <div className="flex flex-col items-center justify-center h-full text-[#8B847C]">
                       <Loader2 className="animate-spin mb-2" />
-                      <p>Loading products...</p>
+                      <p className="text-xs">Loading...</p>
                     </div>
                   ) : filteredProducts.length === 0 ? (
                     <div className="flex flex-col items-center justify-center h-full text-[#8B847C]">
-                      <Package size={48} className="opacity-20 mb-4" />
-                      <p>No products found</p>
+                      <Package size={40} className="opacity-20 mb-4" />
+                      <p className="text-xs">No items found</p>
                     </div>
                   ) : (
                     filteredProducts.map(product => (
                       <div 
                         key={product.id}
-                        className="bg-white border border-[#E6E1D6] p-3 rounded-2xl flex items-center gap-4 group hover:shadow-md transition-shadow"
+                        className="bg-white border border-[#E6E1D6] p-2 md:p-3 rounded-xl md:rounded-2xl flex items-center gap-3 md:gap-4 group hover:shadow-md transition-shadow"
                       >
-                        <div className="w-16 h-16 rounded-xl overflow-hidden bg-[#F4EFE9] flex-shrink-0">
+                        <div className="w-12 h-12 md:w-16 md:h-16 rounded-lg md:rounded-xl overflow-hidden bg-[#F4EFE9] flex-shrink-0">
                           <img src={product.image} alt="" className="w-full h-full object-cover" />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <h4 className="font-medium text-[#2C2C2C] truncate">{product.title}</h4>
-                          <div className="flex items-center gap-2 text-xs text-[#8B847C]">
-                            <span className="bg-[#FAF8F5] px-2 py-0.5 rounded-full border border-[#E6E1D6]">{product.category}</span>
+                          <h4 className="text-sm font-medium text-[#2C2C2C] truncate">{product.title}</h4>
+                          <div className="flex items-center gap-2 text-[10px] text-[#8B847C]">
+                            <span className="bg-[#FAF8F5] px-1.5 py-0.5 rounded-full border border-[#E6E1D6]">{product.category}</span>
                             <span>₹{product.price}</span>
                           </div>
                         </div>
-                        <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div className="flex gap-1 md:gap-2 md:opacity-0 group-hover:opacity-100 transition-opacity">
                           <button 
                             onClick={() => handleOpenForm(product)}
-                            className="p-2 text-[#6B7F59] hover:bg-[#6B7F59]/10 rounded-lg"
+                            className="p-1.5 text-[#6B7F59] hover:bg-[#6B7F59]/10 rounded-lg"
                           >
-                            <Edit2 size={18} />
+                            <Edit2 size={16} />
                           </button>
                           <button 
                             onClick={() => handleDelete(product.id)}
-                            className="p-2 text-red-500 hover:bg-red-50 rounded-lg"
+                            className="p-1.5 text-red-500 hover:bg-red-50 rounded-lg"
                           >
-                            <Trash2 size={18} />
+                            <Trash2 size={16} />
                           </button>
                         </div>
                       </div>
@@ -267,7 +267,7 @@ export function AdminPanel({ isOpen, onClose }) {
                     initial={{ x: 300, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
                     exit={{ x: 300, opacity: 0 }}
-                    className="w-full md:w-96 bg-white overflow-y-auto"
+                    className="absolute inset-0 md:relative md:inset-auto md:w-96 bg-white overflow-y-auto z-20 shadow-2xl md:shadow-none"
                   >
                     <form onSubmit={handleSubmit} className="p-8 space-y-6">
                       <div className="flex items-center justify-between mb-4">

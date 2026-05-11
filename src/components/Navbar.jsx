@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { ShoppingCart, Menu, X } from "lucide-react";
+import { ShoppingCart, Menu, X, ArrowRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { CartDrawer } from "./CartDrawer";
@@ -168,20 +169,26 @@ export function Navbar() {
             }`}
         >
           <div className="flex flex-col p-8 gap-6 h-[calc(100vh-80px)]">
-            <ul className="flex flex-col gap-6">
-              {navLinks.map((link) => (
-                <li key={link.path}>
+            <ul className="flex flex-col gap-5">
+              {navLinks.map((link, index) => (
+                <motion.li 
+                  key={link.path}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={isOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                  transition={{ delay: 0.1 + index * 0.1 }}
+                >
                   <NavLink
                     to={link.path}
                     onClick={() => setIsOpen(false)}
                     className={({ isActive }) =>
-                      `text-2xl font-pacifico transition-colors tracking-wide ${isActive ? "text-[#6B7F59]" : "text-[#3E3832]"
+                      `text-3xl font-playfair transition-all tracking-tight flex items-center justify-between group ${isActive ? "text-[#6B7F59]" : "text-[#2C2C2C]"
                       }`
                     }
                   >
                     {link.name}
+                    <ArrowRight size={20} className="opacity-0 group-hover:opacity-100 transition-opacity text-[#6B7F59]" />
                   </NavLink>
-                </li>
+                </motion.li>
               ))}
             </ul>
 

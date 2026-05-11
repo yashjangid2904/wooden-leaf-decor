@@ -51,10 +51,10 @@ const WoodProductCard = ({ id, image, title, price, badge, category, onClick }) 
           {/* Floating Quick Add Button */}
           <button
             onClick={handleQuickAdd}
-            className={`absolute bottom-3 right-3 w-12 h-12 rounded-full shadow-[0_8px_20px_rgba(0,0,0,0.18)] flex items-center justify-center transition-all duration-300 z-20 
+            className={`absolute bottom-3 right-3 w-10 h-10 md:w-12 md:h-12 rounded-full shadow-[0_8px_20px_rgba(0,0,0,0.18)] flex items-center justify-center transition-all duration-300 z-20 
               ${isAdded 
                 ? "bg-[#6B7F59] scale-110" 
-                : "bg-[#6B7F59] opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 hover:scale-110 hover:bg-[#5A6C4A]"
+                : "bg-[#6B7F59] opacity-100 md:opacity-0 md:group-hover:opacity-100 translate-y-0 md:translate-y-2 md:group-hover:translate-y-0 hover:scale-110 hover:bg-[#5A6C4A]"
               }`}
           >
             {isAdded ? (
@@ -147,13 +147,13 @@ export function ShopPage() {
     { id: "pouffes", name: "Pouffes" },
   ];
 
-  const priceRanges = [
-    { id: "all", name: "All Prices" },
-    { id: "under-50", name: "Under ₹50" },
-    { id: "50-100", name: "₹50 - ₹100" },
-    { id: "100-200", name: "₹100 - ₹200" },
-    { id: "over-200", name: "Over ₹200" },
-  ];
+  // const priceRanges = [
+  //   { id: "all", name: "All Prices" },
+  //   { id: "under-50", name: "Under ₹50" },
+  //   { id: "50-100", name: "₹50 - ₹100" },
+  //   { id: "100-200", name: "₹100 - ₹200" },
+  //   { id: "over-200", name: "Over ₹200" },
+  // ];
 
   const filteredProducts = products.filter((product) => {
     const categoryMatch =
@@ -261,7 +261,7 @@ export function ShopPage() {
             </div>
 
             {/* Price Range */}
-            <div className="">
+            {/* <div className="">
               <h3 className="font-playfair text-xl text-[#5D4037] mb-6 border-b border-[#D4C7B0] pb-3">Price Range</h3>
               <div className="space-y-3">
                 {priceRanges.map((range) => (
@@ -281,7 +281,7 @@ export function ShopPage() {
                   </button>
                 ))}
               </div>
-            </div>
+            </div> */}
           </div>
         </aside>
 
@@ -308,16 +308,16 @@ export function ShopPage() {
             </motion.div>
 
             {/* Mobile Filter Toggle Button (Visible only on mobile) */}
-            <div className="lg:hidden mt-8 sticky top-0 z-30">
+            <div className="lg:hidden mt-6 sticky top-0 z-[40] -mx-4 px-4 py-2 bg-[#FAF8F5]/80 backdrop-blur-md">
               <button
                 onClick={() => setIsMobileFiltersOpen(!isMobileFiltersOpen)}
-                className="mx-auto w-full max-w-md bg-white/80 backdrop-blur-md border border-[#E6E1D6] py-3 px-6 rounded-xl flex items-center justify-between shadow-sm text-[#2C2C2C] font-serif"
+                className="w-full bg-white border border-[#E6E1D6] py-3 px-6 rounded-xl flex items-center justify-between shadow-sm text-[#2C2C2C] font-serif"
               >
-                <span className="flex items-center gap-2">
-                  <SlidersHorizontal size={18} />
-                  Filters & Categories
+                <span className="flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-[#6B7F59]">
+                  <SlidersHorizontal size={16} />
+                  Filters
                 </span>
-                {isMobileFiltersOpen ? <X size={20} /> : <span className="text-xs font-bold bg-[#6B7F59] text-white px-2 py-0.5 rounded-full">{selectedCategory !== 'all' || priceRange !== 'all' ? '!' : '+'}</span>}
+                {isMobileFiltersOpen ? <X size={18} /> : <span className="text-[10px] font-bold bg-[#6B7F59] text-white px-2 py-0.5 rounded-full">{selectedCategory !== 'all' ? 'Active' : 'All'}</span>}
               </button>
             </div>
           </section>
@@ -330,7 +330,7 @@ export function ShopPage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-x-10 gap-y-16">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 md:gap-x-10 gap-y-10 md:gap-y-16">
               {loading ? (
                 Array.from({ length: 8 }).map((_, i) => (
                   <div key={i} className="animate-pulse">
