@@ -1,20 +1,36 @@
 
-import React, { useState } from "react";
-import products from "./data/products";
+import React, { useState, useEffect } from "react";
 import { ProductDetailsModal } from "./ProductDetailsModal";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Loader2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "motion/react";
+import { supabase } from "../lib/supabase";
 
 export function ProductSpotlight() {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  // Take spotlight products (keeping the user's preferred IDs)
-  const spotlightProducts = [18, 17, 12, 15, 16, 5, 9]
-    .map((id) => products.find((p) => p.id === id))
-    .filter(Boolean);
+  useEffect(() => {
+    fetchSpotlightProducts();
+  }, []);
+
+  async function fetchSpotlightProducts() {
+    setLoading(true);
+    // Fetch products that have a badge or are newest
+    const { data, error } = await supabase
+      .from('products')
+      .select('*')
+      .limit(7);
+    
+    if (error) console.error('Error fetching spotlight products:', error);
+    else setProducts(data || []);
+    setLoading(false);
+  }
+
+  const spotlightProducts = products;
 
   const handleProductClick = (product) => {
     setSelectedProduct(product);
@@ -42,7 +58,17 @@ export function ProductSpotlight() {
 
         {/* Horizontal Accordion Layout — No framer layout animations to avoid flicker */}
         <div className="relative flex flex-col lg:flex-row justify-center items-stretch gap-3 md:gap-4 h-auto lg:h-[450px]">
-          {spotlightProducts.map((product, index) => {
+          {loading ? (
+            <div className="w-full flex flex-col items-center justify-center py-20 text-[#8B847C]">
+              <Loader2 className="animate-spin mb-4" size={32} />
+              <p className="font-playfair italic">Curating your artisan gallery...</p>
+            </div>
+          ) : spotlightProducts.length === 0 ? (
+             <div className="w-full text-center py-20 text-[#8B847C]">
+                <p>No products available in spotlight.</p>
+             </div>
+          ) : (
+            spotlightProducts.map((product, index) => {
             const isActive = activeIndex === index;
 
             return (
@@ -73,7 +99,7 @@ export function ProductSpotlight() {
                       ? "w-full lg:w-[450px] ring-1 ring-[#6B7F59]/20 h-[450px] md:h-[500px]"
                       : "w-full lg:w-[100px] opacity-80 hover:opacity-100 h-[120px]"
                   }
-                  lg:h-full bg-white
+                  lg:h-full bg-white border border-[#E6E1D6]/30
                 `}
               >
                 {/* Background Image — plain div, no layout animations */}
@@ -129,8 +155,9 @@ export function ProductSpotlight() {
                 )}
               </div>
             );
-          })}
-        </div>
+          })
+        )}
+      </div>
 
         <motion.div
           initial={{ opacity: 0 }}

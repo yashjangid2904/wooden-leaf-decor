@@ -14,6 +14,9 @@ import { ContactPage } from "./components/Pages/ContactPage";
 import { CheckoutPage } from "./components/Pages/Checkout";
 import { CartProvider } from "./context/CartContext";
 import { ProductCategories } from "./components/ProductCategories";
+import { AdminPanel } from "./components/AdminPanel";
+import { AdminAuthModal } from "./components/AdminAuthModal";
+import { useState, useEffect } from "react";
 
 function Home() {
   return (
@@ -37,10 +40,36 @@ import { useLocation } from "react-router-dom";
 function AppContent() {
   const location = useLocation();
   const showFooter = location.pathname !== "/shop";
+  const [isAdminOpen, setIsAdminOpen] = useState(false);
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'a') {
+        e.preventDefault();
+        if (isAdminOpen) {
+          setIsAdminOpen(false);
+        } else {
+          setIsAuthOpen(prev => !prev);
+        }
+      }
+      if (e.key === 'Escape') {
+        setIsAuthOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isAdminOpen]);
 
   return (
     <CartProvider>
       <Navbar />
+      <AdminAuthModal 
+        isOpen={isAuthOpen} 
+        onClose={() => setIsAuthOpen(false)} 
+        onSuccess={() => setIsAdminOpen(true)} 
+      />
+      <AdminPanel isOpen={isAdminOpen} onClose={() => setIsAdminOpen(false)} />
       <main>
         <Routes>
           <Route path="/" element={<Home />} />

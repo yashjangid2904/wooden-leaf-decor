@@ -1,66 +1,131 @@
 import { useState } from "react";
-import { SlidersHorizontal, Search, X, Check } from "lucide-react";
+import { SlidersHorizontal, Search, X, Check, Plus, ShoppingBag } from "lucide-react";
 import { ProductDetailsModal } from "../ProductDetailsModal";
 import { Footer } from "../Footer";
-import products from "../data/products";
 import { motion, AnimatePresence } from "motion/react";
+import { useCart } from "../../context/CartContext";
+import { supabase } from "../../lib/supabase";
+import { useEffect } from "react";
 
-// --- Enhanced Wood Card Component ---
-const WoodProductCard = ({ image, title, price, badge, category, onClick }) => {
+// --- Minimal Floating Product Card Component ---
+const WoodProductCard = ({ id, image, title, price, badge, category, onClick }) => {
+  const { addToCart } = useCart();
+  const [isAdded, setIsAdded] = useState(false);
+
+  const handleQuickAdd = (e) => {
+    e.stopPropagation();
+    addToCart({ id, image, title, price }, 1);
+    setIsAdded(true);
+    setTimeout(() => setIsAdded(false), 2000);
+  };
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -10 }}
-      transition={{ duration: 0.4 }}
-      whileHover={{ y: -5 }}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      whileHover={{ y: -8 }}
+      transition={{ duration: 0.35, ease: "easeOut" }}
       onClick={onClick}
-      className="group cursor-pointer relative bg-[#FAF8F5] rounded-t-full rounded-b-[1.5rem] overflow-hidden border border-[#E6E1D6] hover:border-[#6B7F59]/30 hover:shadow-[0_10px_30px_rgba(107,127,89,0.15)] transition-all duration-500"
+      className="group cursor-pointer flex flex-col h-full"
     >
-      {/* Wood Texture Overlay (Subtle noise) */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none z-0 mix-blend-multiply bg-[url('https://www.transparenttextures.com/patterns/wood-pattern.png')]"></div>
+      {/* Image Container with Floating Shadow & Glow */}
+      <div className="relative mb-6 flex-shrink-0">
+        {/* Subtle Blurred Background Glow */}
+        <div className="absolute inset-4 bg-[#6B7F59]/15 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none -z-1" />
+        
+        <div className="relative aspect-[4/5] overflow-hidden rounded-[16px] shadow-[0_12px_30px_rgba(0,0,0,0.06)] group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.12)] transition-all duration-500">
+          <img
+            src={image}
+            alt={title}
+            className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"
+          />
 
-      {/* Image Container with Arch */}
-      <div className="relative aspect-[4/5] overflow-hidden m-1.5 rounded-t-full rounded-b-[1.2rem]">
-        <img
-          src={image}
-          alt={title}
-          className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"
-        />
+          {/* Badge - Minimalist Tag */}
+          {badge && (
+            <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-md text-[#6B7F59] text-[9px] font-bold uppercase tracking-[0.2em] px-3 py-1.5 rounded-full shadow-sm z-10 border border-black/5">
+              {badge}
+            </div>
+          )}
 
-        {/* Badge */}
-        {badge && (
-          <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm text-[#6B7F59] text-[9px] font-bold uppercase tracking-widest px-2 py-1 rounded-full shadow-sm z-10 border border-[#6B7F59]/10">
-            {badge}
-          </div>
-        )}
+          {/* Floating Quick Add Button */}
+          <button
+            onClick={handleQuickAdd}
+            className={`absolute bottom-3 right-3 w-12 h-12 rounded-full shadow-[0_8px_20px_rgba(0,0,0,0.18)] flex items-center justify-center transition-all duration-300 z-20 
+              ${isAdded 
+                ? "bg-[#6B7F59] scale-110" 
+                : "bg-[#6B7F59] opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 hover:scale-110 hover:bg-[#5A6C4A]"
+              }`}
+          >
+            {isAdded ? (
+              <Check size={20} className="text-white" />
+            ) : (
+              <Plus size={24} className="text-white" />
+            )}
+          </button>
 
-        {/* Hover Overlay */}
-        <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-          <span className="bg-white/90 backdrop-blur text-[#2C2C2C] px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 shadow-lg">
-            View Details
-          </span>
+          {/* Added to Cart Toast Overlay */}
+          <AnimatePresence>
+            {isAdded && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                className="absolute inset-0 flex items-center justify-center bg-black/20 backdrop-blur-[2px] z-10 pointer-events-none"
+              >
+                <div className="bg-white/90 px-4 py-2 rounded-full shadow-lg flex items-center gap-2">
+                  <ShoppingBag size={14} className="text-[#6B7F59]" />
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-[#2C2C2C]">Added!</span>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Subtle Hover Gradient */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         </div>
       </div>
 
-      {/* Content */}
-      <div className="px-4 pb-4 pt-2 text-center relative z-10">
-        <p className="text-[9px] text-[#6B7F59] uppercase tracking-widest font-bold mb-1 opacity-80">{category}</p>
-        <h3 className="font-playfair text-base text-[#2C2C2C] leading-tight mb-1.5 group-hover:text-[#6B7F59] transition-colors duration-300 line-clamp-1">
+      {/* Product Information - Below the Image */}
+      <div className="text-center flex flex-col flex-grow">
+        <p className="text-[10px] text-[#8B6E4E] uppercase tracking-[0.25em] font-bold mb-2.5 opacity-60">
+          {category}
+        </p>
+        <h3 className="font-playfair text-xl text-[#2C2C2C] leading-snug mb-2 group-hover:text-[#6B7F59] transition-colors duration-300 px-2 line-clamp-2">
           {title}
         </h3>
-        <p className="font-inter font-medium text-sm text-[#8B6E4E]">₹{Number(price).toFixed(2)}</p>
+        <p className="font-inter font-semibold text-[#6B7F59] mt-auto">
+          ₹{Number(price).toFixed(2)}
+        </p>
       </div>
     </motion.div>
   );
 };
 
 export function ShopPage() {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [priceRange, setPriceRange] = useState("all");
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  async function fetchProducts() {
+    setLoading(true);
+    const { data, error } = await supabase
+      .from('products')
+      .select('*')
+      .order('created_at', { ascending: false });
+    
+    if (error) console.error('Error fetching products:', error);
+    else setProducts(data || []);
+    setLoading(false);
+  }
 
   const handleProductClick = (product) => {
     setSelectedProduct(product);
@@ -122,8 +187,6 @@ export function ShopPage() {
           <path d="M50 50 Q80 20 90 10 T50 50" fill="currentColor" transform="rotate(20 50 50)" />
           <path d="M50 50 Q20 80 10 90 T50 50" fill="currentColor" transform="rotate(-10 50 50)" />
         </motion.svg>
-
-
 
         {/* Bottom Left Geometric */}
         <motion.div
@@ -260,23 +323,33 @@ export function ShopPage() {
           </section>
 
           {/* Product Grid */}
-          <div className="px-4 md:px-8 pb-20 max-w-[1200px] mx-auto">
-            <div className="flex items-center justify-between mb-8">
-              <p className="text-[#8B847C] font-inter text-sm">
+          <div className="px-4 md:px-12 pb-24 max-w-[1400px] mx-auto">
+            <div className="flex items-center justify-between mb-12">
+              <p className="text-[#8B847C] font-inter text-sm tracking-wide">
                 Showing <span className="font-bold text-[#2C2C2C]">{filteredProducts.length}</span> handcrafted items
               </p>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-6 md:gap-8">
-              <AnimatePresence>
-                {filteredProducts.map((product) => (
-                  <WoodProductCard
-                    key={product.id}
-                    {...product}
-                    onClick={() => handleProductClick(product)}
-                  />
-                ))}
-              </AnimatePresence>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-x-10 gap-y-16">
+              {loading ? (
+                Array.from({ length: 8 }).map((_, i) => (
+                  <div key={i} className="animate-pulse">
+                    <div className="aspect-[4/5] bg-gray-200 rounded-[16px] mb-4"></div>
+                    <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto mb-2"></div>
+                    <div className="h-4 bg-gray-200 rounded w-3/4 mx-auto"></div>
+                  </div>
+                ))
+              ) : (
+                <AnimatePresence>
+                  {filteredProducts.map((product) => (
+                    <WoodProductCard
+                      key={product.id}
+                      {...product}
+                      onClick={() => handleProductClick(product)}
+                    />
+                  ))}
+                </AnimatePresence>
+              )}
             </div>
 
             {filteredProducts.length === 0 && (
