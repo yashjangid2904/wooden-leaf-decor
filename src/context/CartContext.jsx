@@ -20,11 +20,11 @@ export function CartProvider({ children }) {
       if (existingItem) {
         return prevCart.map((item) =>
           item.id === product.id
-            ? { ...item, quantity: item.quantity + quantity }
+            ? { ...item, quantity: Math.min(item.quantity + quantity, 10) }
             : item
         );
       }
-      return [...prevCart, { ...product, quantity }];
+      return [...prevCart, { ...product, quantity: Math.min(quantity, 10) }];
     });
   };
 
@@ -36,7 +36,7 @@ export function CartProvider({ children }) {
     setCart((prevCart) =>
       prevCart.map((item) => {
         if (item.id === productId) {
-          const newQuantity = Math.max(1, item.quantity + delta);
+          const newQuantity = Math.min(Math.max(1, item.quantity + delta), 10);
           return { ...item, quantity: newQuantity };
         }
         return item;
