@@ -1,4 +1,5 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
+
+import React, { useState } from "react";
 import products from "./data/products";
 import { ProductDetailsModal } from "./ProductDetailsModal";
 import { ArrowRight } from "lucide-react";
@@ -8,46 +9,17 @@ import { motion } from "motion/react";
 export function ProductSpotlight() {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(1);
-  const cardRefs = useRef([]);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   // Take spotlight products (keeping the user's preferred IDs)
-  const spotlightProducts = products
-    .filter((p) => [18, 17, 22, 24, 23, 21, 26].includes(p.id))
-    .slice(0, 7);
+  const spotlightProducts = [18, 17, 12, 15, 16, 5, 9]
+    .map((id) => products.find((p) => p.id === id))
+    .filter(Boolean);
 
   const handleProductClick = (product) => {
     setSelectedProduct(product);
     setIsModalOpen(true);
   };
-
-  // Mobile: IntersectionObserver to activate card when scrolled into view
-  const setCardRef = useCallback((el, index) => {
-    cardRefs.current[index] = el;
-  }, []);
-
-  useEffect(() => {
-    // Only apply on mobile (below lg breakpoint)
-    if (window.innerWidth >= 1024) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const idx = Number(entry.target.dataset.index);
-            setActiveIndex(idx);
-          }
-        });
-      },
-      { threshold: 0.5 } // Activate when 50% visible
-    );
-
-    cardRefs.current.forEach((el) => {
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
-  }, [spotlightProducts.length]);
 
   return (
     <section className="py-12 md:py-20 bg-[#FAF8F5] overflow-hidden">
@@ -76,21 +48,30 @@ export function ProductSpotlight() {
             return (
               <div
                 key={product.id}
-                ref={(el) => setCardRef(el, index)}
-                data-index={index}
                 // Desktop: Hover to activate
                 onMouseEnter={() => {
                   if (window.innerWidth >= 1024) {
                     setActiveIndex(index);
                   }
                 }}
-                onClick={() => handleProductClick(product)}
+                onClick={() => {
+                  if (window.innerWidth < 1024) {
+                    if (!isActive) {
+                      setActiveIndex(index);
+                    } else {
+                      handleProductClick(product);
+                    }
+                  } else {
+                    handleProductClick(product);
+                  }
+                }}
                 className={`
                   relative cursor-pointer rounded-2xl overflow-hidden shadow-md group
                   transition-all duration-500 ease-in-out
-                  ${isActive
-                    ? "w-full lg:w-[450px] ring-1 ring-[#6B7F59]/20 h-[450px] md:h-[500px]"
-                    : "w-full lg:w-[100px] opacity-80 hover:opacity-100 h-[120px]"
+                  ${
+                    isActive
+                      ? "w-full lg:w-[450px] ring-1 ring-[#6B7F59]/20 h-[450px] md:h-[500px]"
+                      : "w-full lg:w-[100px] opacity-80 hover:opacity-100 h-[120px]"
                   }
                   lg:h-full bg-white
                 `}
@@ -100,15 +81,18 @@ export function ProductSpotlight() {
                   <img
                     src={product.image}
                     alt={product.title}
-                    className={`w-full h-full object-cover transition-transform duration-700 ${isActive ? 'scale-105' : 'scale-110 group-hover:scale-105'}`}
+                    className={`w-full h-full object-cover transition-transform duration-700 ${isActive ? "scale-105" : "scale-110 group-hover:scale-105"}`}
                   />
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-500" />
                 </div>
 
                 {/* Expanded Content Overlay — CSS transition instead of AnimatePresence */}
                 <div
-                  className={`absolute inset-0 flex flex-col justify-end p-6 md:p-8 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-all duration-500 ${isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
-                    }`}
+                  className={`absolute inset-0 flex flex-col justify-end p-6 md:p-8 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-all duration-500 ${
+                    isActive
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-4 pointer-events-none"
+                  }`}
                 >
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
@@ -162,7 +146,10 @@ export function ProductSpotlight() {
               Browse Full Artisan Catalog
             </span>
             <div className="bg-[#6B7F59]/10 p-2 rounded-full group-hover:bg-[#6B7F59] group-hover:text-white transition-all">
-              <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
+              <ArrowRight
+                size={18}
+                className="transition-transform group-hover:translate-x-1"
+              />
             </div>
           </Link>
         </motion.div>
