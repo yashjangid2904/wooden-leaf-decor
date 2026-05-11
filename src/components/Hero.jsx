@@ -70,7 +70,7 @@ export function Hero() {
 
       {/* 2. The Background Video */}
       <video
-        src="/Premium_Wooden_Home_Décor_Video.mp4"
+        src="/hero.mp4"
         autoPlay
         loop
         muted

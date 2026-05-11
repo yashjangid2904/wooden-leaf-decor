@@ -148,7 +148,7 @@ export function Footer() {
               <div className="relative">
                 <div className="absolute inset-0 bg-[#6B7F59] blur-md opacity-10 group-hover:opacity-20 transition-opacity rounded-full"></div>
                 <img
-                  src="/logo-new.png"
+                  src="/logo.png"
                   alt="Wooden Leaf"
                   className="relative h-10 w-10 md:h-14 md:w-14 object-contain transition-transform duration-500 group-hover:rotate-12"
                 />
