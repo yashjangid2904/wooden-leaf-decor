@@ -77,7 +77,7 @@ export function Navbar() {
               onClick={() => setIsOpen(false)}
             >
               <img
-                src="/logo-new.png"
+                src="/logo.png"
                 alt="Wooden Leaf Logo"
                 className="h-10 w-10 md:h-12 md:w-12 object-contain transition-transform duration-300 group-hover:scale-110"
               />
