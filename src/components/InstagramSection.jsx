@@ -147,7 +147,7 @@ export function InstagramSection() {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <a
-              href="https://www.instagram.com/woodenleaf.co/"
+              href="https://www.instagram.com/woodenleaf.co?igsh=MXduMzUxYmZ1cmdjZQ=="
               target="_blank"
               rel="noopener noreferrer"
               className="group relative inline-flex items-center gap-4 bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] text-white pl-8 pr-2 py-2 rounded-full font-semibold transition-all duration-500 hover:shadow-[0_20px_50px_rgba(238,42,123,0.3)] shadow-2xl overflow-hidden"
@@ -181,7 +181,7 @@ export function InstagramSection() {
             return (
               <motion.a
                 key={item.id}
-                href="https://www.instagram.com/woodenleaf.co/"
+                href="https://www.instagram.com/woodenleaf.co?igsh=MXduMzUxYmZ1cmdjZQ=="
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ y: parallaxY }}
@@ -455,7 +455,7 @@ export function InstagramSection() {
                 Be part of the <span className="font-semibold text-[#2C2C2C]">community</span>
               </p>
               <motion.a
-                href="https://www.instagram.com/woodenleaf.co/"
+                href="https://www.instagram.com/woodenleaf.co?igsh=MXduMzUxYmZ1cmdjZQ=="
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}

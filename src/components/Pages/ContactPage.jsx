@@ -11,10 +11,14 @@ export function ContactPage() {
     message: "",
   });
 
-  // --- Form submit handler (Preserved) ---
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Thank you for your message! We'll get back to you soon.");
+    
+    const whatsappNumber = "917737863869";
+    const whatsappMessage = `*New Contact Form Inquiry*%0A%0A*Name:* ${formData.name}%0A*Email:* ${formData.email}%0A*Subject:* ${formData.subject || 'General'}%0A*Message:*%0A${formData.message}`;
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+    
+    window.open(whatsappUrl, '_blank');
     setFormData({ name: "", email: "", subject: "", message: "" });
   };
 
@@ -192,22 +196,21 @@ export function ContactPage() {
             <InfoCard
               icon={<Mail className="w-5 h-5" />}
               title="Email"
-              text={["hello@woodenleaf.com", "support@woodenleaf.com"]}
+              text={["woodenleaf.co@gmail.com"]}
             />
 
-            <InfoCard
+            {/* <InfoCard
               icon={<Phone className="w-5 h-5" />}
-              title="Phone"
-              text={["+1 (555) 123-4567", "Mon-Fri, 9am–5pm PST"]}
-            />
+              title="Phone / WhatsApp"
+              text={["+91 77378 63869", "Mon-Sat, 9am–6pm IST"]}
+            /> */}
 
             <InfoCard
               icon={<MapPin className="w-5 h-5" />}
               title="Address"
               text={[
-                "123 Forest Lane",
-                "Portland, OR 97201",
-                "United States",
+                "Jaipur, Rajasthan",
+                "India",
               ]}
             />
 
@@ -215,9 +218,8 @@ export function ContactPage() {
               icon={<Clock className="w-5 h-5" />}
               title="Business Hours"
               text={[
-                "Mon–Fri: 9:00 AM – 5:00 PM",
-                "Saturday: 10:00 AM – 3:00 PM",
-                "Sunday: Closed",
+                "All days a week",
+
               ]}
             />
           </motion.div>

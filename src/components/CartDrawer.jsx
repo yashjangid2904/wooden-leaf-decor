@@ -83,14 +83,16 @@ export function CartDrawer({ isOpen, onClose }) {
                       <div className="flex items-center border border-[#F5F1E8] rounded-lg overflow-hidden bg-white">
                         <button 
                           onClick={() => updateQuantity(item.id, -1)}
-                          className="px-2 py-1 hover:bg-[#F5F1E8] text-[#6B6B6B]"
+                          disabled={item.quantity <= 1}
+                          className="px-2 py-1 hover:bg-[#F5F1E8] text-[#6B6B6B] disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           <Minus size={14} />
                         </button>
                         <span className="px-3 text-sm font-bold">{item.quantity}</span>
                         <button 
                           onClick={() => updateQuantity(item.id, 1)}
-                          className="px-2 py-1 hover:bg-[#F5F1E8] text-[#6B6B6B]"
+                          disabled={item.quantity >= 10}
+                          className="px-2 py-1 hover:bg-[#F5F1E8] text-[#6B6B6B] disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           <Plus size={14} />
                         </button>
