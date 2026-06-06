@@ -79,7 +79,7 @@
 //       category: "wall-decor",
 //       description: "This premium textured wooden panel brings a sense of refined luxury and organic texture to any feature wall.",
 //   },
-    
+
 
 //     // WALL SHELVES & HOOKS
 //     {
@@ -272,26 +272,8 @@ const products = [
     description:
       "Decorative wooden quote board with floral accents that brings warmth and positivity to your home.",
   },
-  {
-    id: 3,
-    image: "/floral-wood-slices.jpg",
-    title: "Floral Painted Wood Slices",
-    price: 999,
-    category: "decorative-accents",
-    badge: "New",
-    description:
-      "Hand-painted floral artwork on natural wood slices, perfect for rustic and artistic decor themes.",
-  },
-  {
-    id: 4,
-    image: "/ocean-art-slices.jpg",
-    title: "Ocean Theme Wooden Art Set",
-    price: 1999,
-    category: "decorative-accents",
-    badge: "New",
-    description:
-      "Ocean-inspired wooden slices with detailed hand-painted artwork, bringing a calming coastal vibe.",
-  },
+
+
   {
     id: 5,
     image: "/wooden-wall-clock.jpeg",
@@ -424,25 +406,25 @@ const products = [
       "Simple and elegant wooden hanging decor to warmly welcome guests.",
   },
   {
-  id: 18,
-  image: "/illusion-table.jpeg",
-  title: "Illusion Table",
-  price: 4999,
-  category: "tabletop-accents",
-  badge: "Art",
-  description:
-    "A modern side table with a unique spiral staircase tunnel design. Perfect for contemporary living spaces."
+    id: 18,
+    image: "/illusion-table.jpeg",
+    title: "Illusion Table",
+    price: 4999,
+    category: "tabletop-accents",
+    badge: "Art",
+    description:
+      "A modern side table with a unique spiral staircase tunnel design. Perfect for contemporary living spaces."
   },
- {
-  id: 19,
-  image: "/wall-art-frames.jpg",
-  title: "Decorative Wall Frame Set",
-  price: 799,
-  category: "wall-decor",
-  badge: "Trending",
-  description:
-    "Minimalist wall frame set with artistic patterns, perfect for enhancing modern living spaces."
-}
+  {
+    id: 19,
+    image: "/wall-art-frames.jpg",
+    title: "Decorative Wall Frame Set",
+    price: 799,
+    category: "wall-decor",
+    badge: "Trending",
+    description:
+      "Minimalist wall frame set with artistic patterns, perfect for enhancing modern living spaces."
+  }
 ];
 
 export default products;
