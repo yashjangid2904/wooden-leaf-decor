@@ -17,10 +17,20 @@ import { ProductCategories } from "./components/ProductCategories";
 import { AdminPanel } from "./components/AdminPanel";
 import { AdminAuthModal } from "./components/AdminAuthModal";
 import { useState, useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 
 function Home() {
   return (
     <>
+      <Helmet>
+        <title>Wooden Leaf Decor | Handcrafted Sustainable Home Accents</title>
+        <meta name="description" content="Discover premium, handcrafted wooden home decor, shelves, tabletop accents, and sustainable furniture. Bring nature's warmth into your home." />
+        <meta name="keywords" content="Wooden Leaf, Wooden Leaf Decor, handcrafted wooden decor, sustainable home accents, artisan wooden furniture, tribal wall plates, eco friendly home decor" />
+        <meta property="og:title" content="Wooden Leaf Decor | Handcrafted Sustainable Home Accents" />
+        <meta property="og:description" content="Discover premium, handcrafted wooden home decor, shelves, tabletop accents, and sustainable furniture." />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://woodenleaf.decor/" />
+      </Helmet>
       <Hero />
       <ProductSpotlight />
       {/* <ParallaxBanner /> */}

@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { Leaf, Heart, Users, Award, ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 export function AboutPage() {
   const navigate = useNavigate();
@@ -74,6 +75,15 @@ export function AboutPage() {
 
   return (
     <div className="min-h-screen bg-[#FAF8F5] relative overflow-hidden">
+      <Helmet>
+        <title>Our Story & Fair Trade Artisans | Wooden Leaf</title>
+        <meta name="description" content="Discover the story of Wooden Leaf. Founded in 2018 by Yash Jangid, we create handcrafted sustainable home decor in partnership with global fair-trade artisans." />
+        <meta name="keywords" content="about Wooden Leaf, Yash Jangid founder, handcrafted wood history, fair trade artisans, sustainable design mission, ethical home decor" />
+        <meta property="og:title" content="Our Story & Fair Trade Artisans | Wooden Leaf" />
+        <meta property="og:description" content="Discover the story of Wooden Leaf, celebrating sustainable craftsmanship since 2018." />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://woodenleaf.decor/about" />
+      </Helmet>
 
       {/* --- Background Texture (Global) --- */}
       <div className="fixed inset-0 opacity-[0.4] pointer-events-none z-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] mix-blend-overlay"></div>

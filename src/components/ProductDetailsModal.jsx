@@ -40,8 +40,27 @@ export function ProductDetailsModal({ product, isOpen, onClose }) {
     navigate("/checkout");
   };
 
+  const schemaMarkup = {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    "name": product.title,
+    "image": product.image,
+    "description": product.description || "Individually handcrafted wooden decor item.",
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "INR",
+      "price": product.price,
+      "availability": "https://schema.org/InStock",
+      "url": `https://woodenleaf.decor/shop?product=${product.id}`
+    }
+  };
+
   return (
     <>
+      <script 
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaMarkup) }}
+      />
       <div 
         className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity duration-300"
         onClick={onClose}

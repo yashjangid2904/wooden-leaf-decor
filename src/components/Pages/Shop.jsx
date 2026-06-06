@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { useCart } from "../../context/CartContext";
 import { supabase } from "../../lib/supabase";
 import { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 
 // --- Minimal Floating Product Card Component ---
 const WoodProductCard = ({ id, image, title, price, badge, category, onClick }) => {
@@ -172,6 +173,15 @@ export function ShopPage() {
 
   return (
     <div className="min-h-screen bg-[#FAF8F5] relative overflow-hidden">
+      <Helmet>
+        <title>Shop Handcrafted Wooden Decor | Wooden Leaf</title>
+        <meta name="description" content="Explore our curated collection of handcrafted wooden home decor, shelves, tabletop accents, and sustainable furniture." />
+        <meta name="keywords" content="handcrafted wooden decor, sustainable home accents, artisan wooden furniture, tribal wall plates, eco friendly home decor, rustic wood mirrors, Wooden Leaf" />
+        <meta property="og:title" content="Shop Artisan Wooden Decor | Wooden Leaf" />
+        <meta property="og:description" content="Thoughtfully designed home accents that bring nature's warmth into your sanctuary." />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://woodenleaf.decor/shop" />
+      </Helmet>
 
       {/* --- Background SVG Decor Elements --- */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">

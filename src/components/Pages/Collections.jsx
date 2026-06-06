@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 // --- Enhanced Wood Collection Card with Wooden Theme ---
 const WoodCollectionCard = ({ image, title, description, onClick, index, className }) => {
@@ -105,6 +106,15 @@ export function CollectionsPage() {
 
   return (
     <div className="min-h-screen bg-[#FAF8F5] relative overflow-hidden pt-24">
+      <Helmet>
+        <title>Artisan Wood Collections | Wooden Leaf</title>
+        <meta name="description" content="Explore our curated artisan collections, featuring minimalist living, cozy spaces, sustainable kitchens, and forest-inspired wooden decor." />
+        <meta name="keywords" content="minimalist living decor, forest wood collection, sustainable kitchen accessories, botanical planters, cozy home environments, Wooden Leaf" />
+        <meta property="og:title" content="Artisan Wood Collections | Wooden Leaf" />
+        <meta property="og:description" content="Explore our curated artisan collections designed to bring warmth and nature into your home." />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://woodenleaf.decor/collections" />
+      </Helmet>
 
       {/* --- Atmospheric Background --- */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
