@@ -51,7 +51,7 @@ export function ProductDetailsModal({ product, isOpen, onClose }) {
       "priceCurrency": "INR",
       "price": product.price,
       "availability": "https://schema.org/InStock",
-      "url": `https://woodenleaf.decor/shop?product=${product.id}`
+      "url": `https://www.woodenleaf.in/shop?product=${product.id}`
     }
   };
 

@@ -113,7 +113,7 @@ export function CollectionsPage() {
         <meta property="og:title" content="Artisan Wood Collections | Wooden Leaf" />
         <meta property="og:description" content="Explore our curated artisan collections designed to bring warmth and nature into your home." />
         <meta property="og:type" content="website" />
-        <link rel="canonical" href="https://woodenleaf.decor/collections" />
+        <link rel="canonical" href="https://www.woodenleaf.in/collections" />
       </Helmet>
 
       {/* --- Atmospheric Background --- */}

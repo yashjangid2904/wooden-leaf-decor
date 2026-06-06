@@ -82,7 +82,7 @@ export function AboutPage() {
         <meta property="og:title" content="Our Story & Fair Trade Artisans | Wooden Leaf" />
         <meta property="og:description" content="Discover the story of Wooden Leaf, celebrating sustainable craftsmanship since 2018." />
         <meta property="og:type" content="website" />
-        <link rel="canonical" href="https://woodenleaf.decor/about" />
+        <link rel="canonical" href="https://www.woodenleaf.in/about" />
       </Helmet>
 
       {/* --- Background Texture (Global) --- */}
