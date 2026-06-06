@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /checkout
+Disallow: /admin
+Disallow: /sustainability
+
+Sitemap: https://woodenleaf.decor/sitemap.xml

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "motion/react";
 import { Mail, Phone, MapPin, Clock, Send, ArrowRight } from "lucide-react";
+import { Helmet } from "react-helmet-async";
 
 export function ContactPage() {
   // --- Existing form state (Preserved) ---
@@ -38,6 +39,15 @@ export function ContactPage() {
 
   return (
     <div className="min-h-screen bg-[#FAF8F5] relative overflow-hidden">
+      <Helmet>
+        <title>Contact Us & Bespoke Custom Orders | Wooden Leaf</title>
+        <meta name="description" content="Get in touch with Wooden Leaf. Contact our team in Jaipur for general questions or request a bespoke custom wooden order tailored to your home." />
+        <meta name="keywords" content="contact Wooden Leaf, custom wooden order, bespoke woodwork jaipur, wooden decor inquiries, order custom tray, custom wood mirrors" />
+        <meta property="og:title" content="Contact Us & Custom Orders | Wooden Leaf" />
+        <meta property="og:description" content="Reach out to Wooden Leaf for inquiries or custom handcrafted order requests." />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://woodenleaf.decor/contact" />
+      </Helmet>
 
       {/* --- Background Texture (Global) --- */}
       <div className="fixed inset-0 opacity-[0.4] pointer-events-none z-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] mix-blend-overlay"></div>

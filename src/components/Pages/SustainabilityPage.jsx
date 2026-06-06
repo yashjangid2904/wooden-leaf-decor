@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from "react";
 import { motion, useSpring, useInView, useMotionValue } from "motion/react";
 import { Leaf, Recycle, TreePine, Droplet, Heart, Award, ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 export function SustainabilityPage() {
   const navigate = useNavigate();
@@ -106,6 +107,9 @@ export function SustainabilityPage() {
 
   return (
     <div className="min-h-screen bg-[#FAF8F5] relative overflow-hidden">
+      <Helmet>
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
 
       {/* --- Background Texture (Global) --- */}
       <div className="fixed inset-0 opacity-[0.4] pointer-events-none z-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] mix-blend-overlay"></div>
