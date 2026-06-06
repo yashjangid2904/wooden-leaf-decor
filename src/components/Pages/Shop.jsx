@@ -180,7 +180,7 @@ export function ShopPage() {
         <meta property="og:title" content="Shop Artisan Wooden Decor | Wooden Leaf" />
         <meta property="og:description" content="Thoughtfully designed home accents that bring nature's warmth into your sanctuary." />
         <meta property="og:type" content="website" />
-        <link rel="canonical" href="https://woodenleaf.decor/shop" />
+        <link rel="canonical" href="https://www.woodenleaf.in/shop" />
       </Helmet>
 
       {/* --- Background SVG Decor Elements --- */}

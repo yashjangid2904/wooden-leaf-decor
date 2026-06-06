@@ -46,7 +46,7 @@ export function ContactPage() {
         <meta property="og:title" content="Contact Us & Custom Orders | Wooden Leaf" />
         <meta property="og:description" content="Reach out to Wooden Leaf for inquiries or custom handcrafted order requests." />
         <meta property="og:type" content="website" />
-        <link rel="canonical" href="https://woodenleaf.decor/contact" />
+        <link rel="canonical" href="https://www.woodenleaf.in/contact" />
       </Helmet>
 
       {/* --- Background Texture (Global) --- */}

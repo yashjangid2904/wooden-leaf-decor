@@ -4,4 +4,4 @@ Disallow: /checkout
 Disallow: /admin
 Disallow: /sustainability
 
-Sitemap: https://woodenleaf.decor/sitemap.xml
+Sitemap: https://www.woodenleaf.in/sitemap.xml

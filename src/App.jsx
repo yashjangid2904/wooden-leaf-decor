@@ -29,7 +29,7 @@ function Home() {
         <meta property="og:title" content="Wooden Leaf Decor | Handcrafted Sustainable Home Accents" />
         <meta property="og:description" content="Discover premium, handcrafted wooden home decor, shelves, tabletop accents, and sustainable furniture." />
         <meta property="og:type" content="website" />
-        <link rel="canonical" href="https://woodenleaf.decor/" />
+        <link rel="canonical" href="https://www.woodenleaf.in/" />
       </Helmet>
       <Hero />
       <ProductSpotlight />
