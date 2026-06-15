@@ -124,6 +124,173 @@ export function ProductCategories() {
 
 
 
+
+
+        {/* ================================================================= */}
+        {/* MOBILE-ONLY BACKGROUND COSMETICS — block lg:hidden                */}
+        {/* All animations use y/scale/rotate/opacity only — NO x animations  */}
+        {/* to prevent horizontal scroll bleed on mobile                      */}
+        {/* ================================================================= */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden block lg:hidden z-0">
+
+          {/* ── Warm gradient orb — top right corner (inset, no x animate) ── */}
+          <motion.div
+            animate={{ y: [0, 15, 0], scale: [1, 1.05, 1] }}
+            transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-0 right-0 w-[220px] h-[220px] bg-[#6B7F59]/12 rounded-full blur-[70px]"
+          />
+
+          {/* ── Earthy warm orb — bottom left corner (inset, no x animate) ── */}
+          <motion.div
+            animate={{ y: [0, 20, 0], scale: [1, 1.08, 1] }}
+            transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute bottom-0 left-0 w-[200px] h-[200px] bg-[#8B6E4E]/10 rounded-full blur-[60px]"
+          />
+
+          {/* ── Amber glow — bottom right (inset safe) ── */}
+          <motion.div
+            animate={{ y: [0, -20, 0], scale: [1, 1.06, 1] }}
+            transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute bottom-0 right-0 w-[180px] h-[180px] bg-[#C9A84C]/8 rounded-full blur-[50px]"
+          />
+
+          {/* ── Sage orb — top left (inset safe) ── */}
+          <motion.div
+            animate={{ y: [0, 10, 0], scale: [1, 1.04, 1] }}
+            transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-16 left-0 w-[160px] h-[160px] bg-[#6B7F59]/8 rounded-full blur-[50px]"
+          />
+
+          {/* ── Subtle wood-grain texture overlay ── */}
+          <div className="absolute inset-0 opacity-[0.25] bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] mix-blend-overlay" />
+
+          {/* ── TOP botanical branch — top left corner (scale only) ── */}
+          <motion.svg
+            animate={{ scale: [1, 1.03, 1] }}
+            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-0 left-0 w-[160px] h-[200px] opacity-[0.12] origin-top-left"
+          >
+            {/* Main stem */}
+            <path d="M-5 -5 C10 30 20 70 30 110 C40 150 25 200 10 240" stroke="#5D4037" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+            {/* Sub-branch right */}
+            <path d="M18 60 C40 48 65 50 80 62" stroke="#5D4037" strokeWidth="1.5" strokeLinecap="round" fill="none" />
+            {/* Sub-branch right lower */}
+            <path d="M28 130 C52 118 78 125 95 138" stroke="#5D4037" strokeWidth="1.2" strokeLinecap="round" fill="none" />
+            {/* Leaves on main branch */}
+            <g transform="translate(8 40) rotate(-50)">
+              <path d="M0 0 C-6 -10 -4 -22 0 -30 C4 -22 6 -10 0 0 Z" fill="#6B7F59" />
+            </g>
+            <g transform="translate(22 100) rotate(40)">
+              <path d="M0 0 C-8 -12 -5 -26 0 -36 C5 -26 8 -12 0 0 Z" fill="#6B7F59" />
+            </g>
+            <g transform="translate(15 170) rotate(-45)">
+              <path d="M0 0 C-6 -9 -4 -20 0 -28 C4 -20 6 -9 0 0 Z" fill="#6B7F59" />
+            </g>
+            {/* Leaves on sub-branches */}
+            <g transform="translate(55 50) rotate(-20)">
+              <path d="M0 0 C-5 -8 -3 -18 0 -24 C3 -18 5 -8 0 0 Z" fill="#8B6E4E" />
+            </g>
+            <g transform="translate(70 130) rotate(25)">
+              <path d="M0 0 C-5 -8 -3 -18 0 -24 C3 -18 5 -8 0 0 Z" fill="#6B7F59" />
+            </g>
+            {/* Seed buds */}
+            <circle cx="82" cy="62" r="2.5" fill="#5D4037" opacity="0.5" />
+            <circle cx="96" cy="138" r="2" fill="#5D4037" opacity="0.4" />
+          </motion.svg>
+
+          {/* ── TOP right corner — decorative ring cluster (rotate only) ── */}
+          <motion.svg
+            animate={{ rotate: [0, 360] }}
+            transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
+            className="absolute top-6 right-4 w-[80px] h-[80px] opacity-[0.18]"
+            viewBox="0 0 90 90"
+            style={{ transformOrigin: "40px 40px" }}
+          >
+            <circle cx="45" cy="45" r="38" fill="none" stroke="#C9A84C" strokeWidth="1" />
+            <circle cx="45" cy="45" r="28" fill="none" stroke="#C9A84C" strokeWidth="0.8" strokeDasharray="4 5" />
+            <circle cx="45" cy="45" r="16" fill="none" stroke="#6B7F59" strokeWidth="0.8" />
+            <circle cx="45" cy="7" r="3" fill="#C9A84C" opacity="0.6" />
+          </motion.svg>
+
+          {/* ── Scattered dot pattern — upper mid area (y only) ── */}
+          <motion.svg
+            animate={{ y: [0, -8, 0] }}
+            transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-[12%] left-[35%] w-20 h-20 opacity-[0.15]"
+            viewBox="0 0 100 100"
+          >
+            <circle cx="15" cy="20" r="4" fill="#6B7F59" />
+            <circle cx="50" cy="10" r="3" fill="#8B6E4E" />
+            <circle cx="80" cy="30" r="5" fill="#6B7F59" />
+            <circle cx="30" cy="60" r="3.5" fill="#C9A84C" />
+            <circle cx="70" cy="55" r="4" fill="#8B6E4E" />
+            <circle cx="55" cy="80" r="3" fill="#6B7F59" />
+          </motion.svg>
+
+          {/* ── BOTTOM right botanical sprig (rotate only, NO x animate) ── */}
+          <motion.svg
+            animate={{ rotate: [-3, 3, -3] }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute bottom-8 right-2 w-[100px] h-[130px] opacity-[0.10]"
+            viewBox="0 0 120 150"
+            style={{ transformOrigin: "60px 75px" }}
+          >
+            {/* Stem */}
+            <path d="M60 150 Q58 110 55 80 Q52 50 60 10" fill="none" stroke="#5D4037" strokeWidth="2" strokeLinecap="round" />
+            {/* Leaves */}
+            <g transform="translate(48 30) rotate(-40)">
+              <path d="M0 0 C-8 -12 -5 -26 0 -36 C5 -26 8 -12 0 0 Z" fill="#6B7F59" />
+            </g>
+            <g transform="translate(65 55) rotate(35)">
+              <path d="M0 0 C-7 -10 -4 -22 0 -30 C4 -22 7 -10 0 0 Z" fill="#6B7F59" />
+            </g>
+            <g transform="translate(45 80) rotate(-30)">
+              <path d="M0 0 C-6 -9 -4 -20 0 -28 C4 -20 6 -9 0 0 Z" fill="#8B6E4E" />
+            </g>
+            <g transform="translate(65 105) rotate(25)">
+              <path d="M0 0 C-6 -9 -4 -20 0 -28 C4 -20 6 -9 0 0 Z" fill="#6B7F59" />
+            </g>
+            {/* Small bud */}
+            <circle cx="60" cy="8" r="2.5" fill="#5D4037" opacity="0.45" />
+          </motion.svg>
+
+          {/* ── BOTTOM left diamond accent (rotate + y only) ── */}
+          <motion.svg
+            animate={{ rotate: [0, 90, 180, 270, 360], y: [0, -8, 0] }}
+            transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute bottom-16 left-5 w-12 h-12 opacity-[0.18]"
+            viewBox="0 0 60 60"
+            style={{ transformOrigin: "30px 30px" }}
+          >
+            <rect x="15" y="15" width="30" height="30" rx="4" fill="#C17F59" opacity="0.4" transform="rotate(45 30 30)" />
+            <rect x="22" y="22" width="16" height="16" rx="2" fill="#C17F59" opacity="0.2" transform="rotate(45 30 30)" />
+          </motion.svg>
+
+          {/* ── Bottom center wavy amber line (opacity only, NO x animate) ── */}
+          <motion.svg
+            animate={{ opacity: [0.3, 0.6, 0.3] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute bottom-4 left-[5%] w-[90%] h-10"
+            viewBox="0 0 300 40"
+          >
+            <path d="M0 20 Q37 5 75 20 Q112 35 150 20 Q187 5 225 20 Q262 35 300 20" fill="none" stroke="#D4A574" strokeWidth="1.5" strokeLinecap="round" opacity="0.5" />
+            <path d="M0 30 Q37 15 75 30 Q112 45 150 30 Q187 15 225 30 Q262 45 300 30" fill="none" stroke="#D4A574" strokeWidth="1" strokeLinecap="round" opacity="0.3" />
+          </motion.svg>
+
+          {/* ── Top center horizontal dots row (opacity only) ── */}
+          <motion.svg
+            animate={{ opacity: [0.3, 0.6, 0.3] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-[7%] left-[15%] w-[70%] h-4"
+            viewBox="0 0 200 16"
+          >
+            {[0,1,2,3,4,5,6,7,8].map(i => (
+              <circle key={i} cx={12 + i * 22} cy="8" r="2.5" fill="#6B7F59" opacity={0.3 + (i % 3) * 0.1} />
+            ))}
+          </motion.svg>
+
+        </div>
+
         {/* Section Header */}
         <div className="max-w-3xl mx-auto px-6 text-center mb-4">
           <motion.div
@@ -156,6 +323,124 @@ export function ProductCategories() {
 
         {/* Stacking Cards List with animated SVG decorations */}
         <div className="relative pt-0">
+
+          {/* =============================================================== */}
+          {/* MOBILE-ONLY DECORATIONS (block lg:hidden)                       */}
+          {/* These replace the desktop decorations that are all hidden lg:block */}
+          {/* =============================================================== */}
+
+          {/* Large centered gold triple ring — safe size, scale/opacity only (no rotate = no diagonal overflow) */}
+          <motion.svg
+            className="absolute top-[35%] left-1/2 -translate-x-1/2 w-[200px] h-[200px] text-[#C9A84C]/20 block lg:hidden pointer-events-none z-0"
+            viewBox="0 0 70 70"
+            animate={{ scale: [1, 1.04, 1], opacity: [0.6, 1, 0.6] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <circle cx="35" cy="35" r="32" fill="none" stroke="currentColor" strokeWidth="0.8" opacity="0.8" />
+            <circle cx="35" cy="35" r="26" fill="none" stroke="currentColor" strokeWidth="0.6" opacity="0.6" strokeDasharray="4 6" />
+            <circle cx="35" cy="35" r="19" fill="none" stroke="currentColor" strokeWidth="0.6" opacity="0.5" />
+            <circle cx="35" cy="35" r="12" fill="none" stroke="currentColor" strokeWidth="0.5" opacity="0.4" />
+            <circle cx="35" cy="35" r="5" fill="none" stroke="currentColor" strokeWidth="0.4" opacity="0.3" />
+          </motion.svg>
+
+          {/* Top-left dot cluster — y only, no x */}
+          <motion.svg
+            className="absolute top-[5%] left-[2%] w-16 h-16 text-[#D4C7B0]/25 block lg:hidden pointer-events-none z-0"
+            viewBox="0 0 80 80"
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+          >
+            {/* 3x3 dot grid */}
+            {[0, 1, 2].map(row =>
+              [0, 1, 2].map(col => (
+                <circle key={`${row}-${col}`} cx={12 + col * 22} cy={12 + row * 22} r="3" fill="currentColor" />
+              ))
+            )}
+          </motion.svg>
+
+          {/* Top-right scattered dots — y only, no x */}
+          <motion.svg
+            className="absolute top-[8%] right-[2%] w-16 h-16 text-[#D4C7B0]/20 block lg:hidden pointer-events-none z-0"
+            viewBox="0 0 100 100"
+            animate={{ y: [0, 12, 0] }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <circle cx="20" cy="25" r="5" fill="currentColor" opacity="0.7" />
+            <circle cx="55" cy="15" r="3" fill="currentColor" opacity="0.5" />
+            <circle cx="80" cy="35" r="4" fill="currentColor" opacity="0.6" />
+            <circle cx="40" cy="60" r="6" fill="currentColor" opacity="0.35" />
+            <circle cx="70" cy="55" r="3" fill="currentColor" opacity="0.4" />
+          </motion.svg>
+
+          {/* Left leaf branch — rotate only, no x, explicit transformOrigin */}
+          <motion.svg
+            className="absolute top-[30%] left-[0%] w-20 h-20 text-[#6B7F59]/10 block lg:hidden pointer-events-none z-0"
+            viewBox="0 0 120 120"
+            style={{ transformOrigin: "60px 60px" }}
+            animate={{ rotate: [-5, 5, -5] }}
+            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+          >
+            {/* Stem */}
+            <path d="M60 110 Q55 80 50 50 Q48 30 55 10" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            {/* Left leaves */}
+            <ellipse cx="38" cy="35" rx="14" ry="7" transform="rotate(-35 38 35)" fill="currentColor" opacity="0.6" />
+            <ellipse cx="42" cy="60" rx="12" ry="6" transform="rotate(-40 42 60)" fill="currentColor" opacity="0.5" />
+            {/* Right leaves */}
+            <ellipse cx="65" cy="25" rx="13" ry="6" transform="rotate(30 65 25)" fill="currentColor" opacity="0.5" />
+            <ellipse cx="62" cy="48" rx="11" ry="5.5" transform="rotate(35 62 48)" fill="currentColor" opacity="0.4" />
+          </motion.svg>
+
+          {/* Right wavy amber lines — opacity only, no x */}
+          <motion.svg
+            className="absolute top-[45%] right-[0%] w-16 h-12 block lg:hidden pointer-events-none z-0"
+            viewBox="0 0 100 60"
+            animate={{ opacity: [0.4, 0.7, 0.4] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <path d="M5 15 Q25 5 45 15 Q65 25 85 15" fill="none" stroke="#D4A574" strokeWidth="2" strokeLinecap="round" opacity="0.35" />
+            <path d="M5 30 Q25 20 45 30 Q65 40 85 30" fill="none" stroke="#D4A574" strokeWidth="1.5" strokeLinecap="round" opacity="0.25" />
+            <path d="M5 45 Q25 35 45 45 Q65 55 85 45" fill="none" stroke="#D4A574" strokeWidth="1" strokeLinecap="round" opacity="0.18" />
+          </motion.svg>
+
+          {/* Bottom-left pulsing concentric rings */}
+          <motion.svg
+            className="absolute top-[75%] left-[3%] w-14 h-14 text-[#D4C7B0]/20 block lg:hidden pointer-events-none z-0"
+            viewBox="0 0 60 60"
+            animate={{ scale: [1, 1.18, 1], opacity: [0.4, 0.7, 0.4] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <circle cx="30" cy="30" r="25" fill="none" stroke="currentColor" strokeWidth="1.2" />
+            <circle cx="30" cy="30" r="17" fill="none" stroke="currentColor" strokeWidth="0.8" />
+            <circle cx="30" cy="30" r="8" fill="none" stroke="currentColor" strokeWidth="0.6" />
+          </motion.svg>
+
+          {/* Bottom-right spiral — explicit transformOrigin to avoid overflow */}
+          <motion.svg
+            className="absolute top-[80%] right-[4%] w-16 h-16 text-[#6B7F59]/12 block lg:hidden pointer-events-none z-0"
+            viewBox="0 0 100 100"
+            style={{ transformOrigin: "32px 32px" }}
+            animate={{ rotate: [0, 360] }}
+            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+          >
+            <path
+              d="M50 50 C50 40, 60 35, 65 45 C70 55, 60 65, 50 60 C40 55, 35 45, 45 38 C55 31, 70 40, 72 52 C74 65, 58 75, 45 70 C32 65, 28 48, 38 35 C48 22, 72 28, 78 48"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+            />
+          </motion.svg>
+
+          {/* Sage green star - explicit transformOrigin so rotate stays in bounds */}
+          <motion.svg
+            className="absolute top-[60%] right-[2%] w-12 h-12 block lg:hidden pointer-events-none z-0"
+            viewBox="0 0 60 60"
+            style={{ transformOrigin: "24px 24px" }}
+            animate={{ scale: [0.9, 1.1, 0.9] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <path d="M30 5 L35 25 L55 30 L35 35 L30 55 L25 35 L5 30 L25 25 Z" fill="#6B7F59" opacity="0.15" />
+          </motion.svg>
 
           {/* =============== LEFT SIDE DECORATIONS =============== */}
 

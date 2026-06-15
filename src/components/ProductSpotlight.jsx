@@ -56,8 +56,120 @@ export function ProductSpotlight() {
           <div className="w-16 h-1 bg-[#6B7F59]/20 mx-auto rounded-full"></div>
         </motion.div>
 
-        {/* Horizontal Accordion Layout — No framer layout animations to avoid flicker */}
-        <div className="relative flex flex-col lg:flex-row justify-center items-stretch gap-3 md:gap-4 h-auto lg:h-[450px]">
+        {/* ─────────────────────────────────────────────────────────────── */}
+        {/* MOBILE LAYOUT: Hero Card + 2-Column Grid (visible only < md)  */}
+        {/* ─────────────────────────────────────────────────────────────── */}
+        <div className="md:hidden">
+          {loading ? (
+            /* Loading state for mobile */
+            <div className="w-full flex flex-col items-center justify-center py-20 text-[#8B847C]">
+              <Loader2 className="animate-spin mb-4" size={32} />
+              <p className="font-playfair italic">Curating your artisan gallery...</p>
+            </div>
+          ) : spotlightProducts.length === 0 ? (
+            /* Empty state for mobile */
+            <div className="w-full text-center py-20 text-[#8B847C]">
+              <p>No products available in spotlight.</p>
+            </div>
+          ) : (
+            <>
+              {/* ── Hero Card: first product, full-width, tall ── */}
+              {spotlightProducts[0] && (
+                <motion.div
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                  onClick={() => handleProductClick(spotlightProducts[0])}
+                  className="relative cursor-pointer rounded-2xl overflow-hidden shadow-lg mb-3 h-[300px]"
+                >
+                  {/* Hero background image */}
+                  <img
+                    src={spotlightProducts[0].image}
+                    alt={spotlightProducts[0].title}
+                    className="w-full h-full object-cover scale-105"
+                  />
+
+                  {/* Dark gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
+
+                  {/* Hero content — price badge + title + CTA */}
+                  <div className="absolute inset-0 flex flex-col justify-end p-5">
+                    {/* Price badge */}
+                    <span className="inline-block self-start text-[#6B7F59] font-bold text-[10px] uppercase tracking-widest bg-white/95 px-3 py-1 rounded-full shadow-sm mb-3">
+                      ₹{spotlightProducts[0].price}
+                    </span>
+
+                    {/* Product title */}
+                    <h3 className="text-2xl text-white font-playfair leading-tight mb-1">
+                      {spotlightProducts[0].title}
+                    </h3>
+
+                    {/* Short description */}
+                    <p className="text-white/75 text-xs line-clamp-2 mb-4">
+                      {spotlightProducts[0].description}
+                    </p>
+
+                    {/* CTA button */}
+                    <button className="self-start flex items-center gap-2 bg-[#6B7F59] text-white px-5 py-2 rounded-xl text-sm font-semibold shadow-lg active:scale-95 transition-transform">
+                      Explore Details
+                      <ArrowRight size={16} />
+                    </button>
+                  </div>
+
+                  {/* "Featured" label in top-right corner */}
+                  <div className="absolute top-4 right-4 bg-[#6B7F59] text-white text-[9px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full shadow">
+                    Featured
+                  </div>
+                </motion.div>
+              )}
+
+              {/* ── 2-Column Grid: remaining products ── */}
+              {spotlightProducts.length > 1 && (
+                <div className="grid grid-cols-2 gap-3">
+                  {spotlightProducts.slice(1).map((product, index) => (
+                    <motion.div
+                      key={product.id}
+                      initial={{ opacity: 0, y: 16 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: index * 0.08 }}
+                      onClick={() => handleProductClick(product)}
+                      className="relative cursor-pointer rounded-xl overflow-hidden shadow-md h-[160px] group active:scale-95 transition-transform"
+                    >
+                      {/* Grid card background image */}
+                      <img
+                        src={product.image}
+                        alt={product.title}
+                        className="w-full h-full object-cover group-active:scale-105 transition-transform duration-300"
+                      />
+
+                      {/* Gradient overlay always visible at bottom for readability */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+
+                      {/* Price badge top-left */}
+                      <span className="absolute top-2 left-2 text-[#6B7F59] font-bold text-[9px] uppercase tracking-widest bg-white/95 px-2 py-0.5 rounded-full shadow-sm">
+                        ₹{product.price}
+                      </span>
+
+                      {/* Product title at bottom */}
+                      <div className="absolute bottom-0 left-0 right-0 p-3">
+                        <p className="text-white text-xs font-playfair leading-tight line-clamp-2">
+                          {product.title}
+                        </p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              )}
+            </>
+          )}
+        </div>
+
+        {/* ─────────────────────────────────────────────────────────────────── */}
+        {/* DESKTOP/TABLET LAYOUT: Horizontal Accordion (md and above only)    */}
+        {/* ─────────────────────────────────────────────────────────────────── */}
+        <div className="relative hidden md:flex flex-col lg:flex-row justify-center items-stretch gap-3 md:gap-4 h-auto lg:h-[450px]">
           {loading ? (
             <div className="w-full flex flex-col items-center justify-center py-20 text-[#8B847C]">
               <Loader2 className="animate-spin mb-4" size={32} />
