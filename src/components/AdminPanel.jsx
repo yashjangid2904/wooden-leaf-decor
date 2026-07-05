@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Plus, Trash2, Edit2, Save, Upload, Search, Package, Image as ImageIcon, Loader2, Check } from 'lucide-react';
-import { supabase } from '../lib/supabase';
+import { X, Plus, Trash2, Edit2, Save, Upload, Search, Package, Image as ImageIcon, Loader2, Check, AlertTriangle } from 'lucide-react';
+import localProducts from './data/products';
 
 const CATEGORIES = [
   { id: "home-decor", name: "Home Decor" },
@@ -43,15 +43,10 @@ export function AdminPanel({ isOpen, onClose }) {
     }
   }, [isOpen]);
 
+  // Load local product data (read-only, no backend)
   async function fetchProducts() {
     setLoading(true);
-    const { data, error } = await supabase
-      .from('products')
-      .select('*')
-      .order('created_at', { ascending: false });
-    
-    if (error) console.error('Error fetching products:', error);
-    else setProducts(data || []);
+    setProducts(localProducts);
     setLoading(false);
   }
 
@@ -80,78 +75,20 @@ export function AdminPanel({ isOpen, onClose }) {
     setIsFormOpen(true);
   };
 
+  // Image upload disabled — no backend storage available
   const handleImageUpload = async (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    setUploading(true);
-    const fileExt = file.name.split('.').pop();
-    const fileName = `${Math.random()}.${fileExt}`;
-    const filePath = `product-images/${fileName}`;
-
-    const { error: uploadError } = await supabase.storage
-      .from('product-images')
-      .upload(filePath, file);
-
-    if (uploadError) {
-      console.error('Error uploading image:', uploadError);
-      setUploading(false);
-      return;
-    }
-
-    const { data: { publicUrl } } = supabase.storage
-      .from('product-images')
-      .getPublicUrl(filePath);
-
-    setFormData(prev => ({ ...prev, image: publicUrl }));
-    setUploading(false);
+    alert('⚠️ Image upload is disabled. Connect a Supabase backend to enable this feature.');
   };
 
+  // Save disabled — no backend database available
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-
-    const payload = {
-      ...formData,
-      price: parseFloat(formData.price),
-      badge: formData.badge === "None" ? null : formData.badge
-    };
-
-    let error;
-    if (editingProduct) {
-      const { error: updateError } = await supabase
-        .from('products')
-        .update(payload)
-        .eq('id', editingProduct.id);
-      error = updateError;
-    } else {
-      const { error: insertError } = await supabase
-        .from('products')
-        .insert([payload]);
-      error = insertError;
-    }
-
-    if (error) {
-      console.error('Error saving product:', error);
-    } else {
-      setIsFormOpen(false);
-      fetchProducts();
-    }
-    setLoading(false);
+    alert('⚠️ Save is disabled. Connect a Supabase backend to add/edit products.');
   };
 
+  // Delete disabled — no backend database available
   const handleDelete = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this product?")) return;
-    
-    setLoading(true);
-    const { error } = await supabase
-      .from('products')
-      .delete()
-      .eq('id', id);
-
-    if (error) console.error('Error deleting product:', error);
-    else fetchProducts();
-    setLoading(false);
+    alert('⚠️ Delete is disabled. Connect a Supabase backend to delete products.');
   };
 
   const filteredProducts = products.filter(p => 

@@ -4,8 +4,7 @@ import { ProductDetailsModal } from "../ProductDetailsModal";
 import { Footer } from "../Footer";
 import { motion, AnimatePresence } from "motion/react";
 import { useCart } from "../../context/CartContext";
-import { supabase } from "../../lib/supabase";
-import { useEffect } from "react";
+import localProducts from "../data/products";
 import { Helmet } from "react-helmet-async";
 
 // --- Minimal Floating Product Card Component ---
@@ -104,29 +103,14 @@ const WoodProductCard = ({ id, image, title, price, badge, category, onClick }) 
 };
 
 export function ShopPage() {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // Using local product data (no backend dependency)
+  const [products] = useState(localProducts);
+  const [loading] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [priceRange, setPriceRange] = useState("all");
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
-
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
-  async function fetchProducts() {
-    setLoading(true);
-    const { data, error } = await supabase
-      .from('products')
-      .select('*')
-      .order('created_at', { ascending: false });
-    
-    if (error) console.error('Error fetching products:', error);
-    else setProducts(data || []);
-    setLoading(false);
-  }
 
   const handleProductClick = (product) => {
     setSelectedProduct(product);
@@ -138,7 +122,7 @@ export function ShopPage() {
     { id: "home-decor", name: "Home Decor" },
     { id: "decorative-accents", name: "Decorative Accents" },
     { id: "wall-decor", name: "Wall Decor" },
-    { id: "wall-shelves", name: "Shelves & Hooks" },
+    { id: "shelves-hooks", name: "Shelves & Hooks" },
     { id: "tabletop-accents", name: "Tabletop Accents" },
     { id: "furniture", name: "Furniture" },
     { id: "kitchen-dining", name: "Kitchen & Dining" },
