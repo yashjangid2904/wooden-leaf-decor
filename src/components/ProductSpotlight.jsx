@@ -1,34 +1,18 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { ProductDetailsModal } from "./ProductDetailsModal";
 import { ArrowRight, Loader2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "motion/react";
-import { supabase } from "../lib/supabase";
+import localProducts from "./data/products";
 
 export function ProductSpotlight() {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // Using local product data — first 7 items for spotlight
+  const [products] = useState(localProducts.slice(0, 7));
+  const [loading] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
-
-  useEffect(() => {
-    fetchSpotlightProducts();
-  }, []);
-
-  async function fetchSpotlightProducts() {
-    setLoading(true);
-    // Fetch products that have a badge or are newest
-    const { data, error } = await supabase
-      .from('products')
-      .select('*')
-      .limit(7);
-    
-    if (error) console.error('Error fetching spotlight products:', error);
-    else setProducts(data || []);
-    setLoading(false);
-  }
 
   const spotlightProducts = products;
 
