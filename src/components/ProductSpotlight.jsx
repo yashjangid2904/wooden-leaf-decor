@@ -1,15 +1,30 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ProductDetailsModal } from "./ProductDetailsModal";
 import { ArrowRight, Loader2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "motion/react";
-import localProducts from "./data/products";
+import { supabase } from "../lib/supabase";
 
 export function ProductSpotlight() {
-  // Using local product data — first 7 items for spotlight
-  const [products] = useState(localProducts.slice(0, 7));
-  const [loading] = useState(false);
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchSpotlight() {
+      const { data, error } = await supabase
+        .from('products')
+        .select('*')
+        .order('created_at', { ascending: false })
+        .limit(7);
+
+      if (!error && data) {
+        setProducts(data);
+      }
+      setLoading(false);
+    }
+    fetchSpotlight();
+  }, []);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);

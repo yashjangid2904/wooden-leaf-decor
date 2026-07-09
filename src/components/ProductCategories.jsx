@@ -1,7 +1,7 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { ReactLenis } from "lenis/react";
-import products from "./data/products";
+import { supabase } from "../lib/supabase";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -87,6 +87,19 @@ const CategoryCard = ({ i, category, progress, range, targetScale }) => {
 
 export function ProductCategories() {
   const container = useRef(null);
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    async function fetchProducts() {
+      const { data, error } = await supabase
+        .from('products')
+        .select('*');
+      if (!error && data) {
+        setProducts(data);
+      }
+    }
+    fetchProducts();
+  }, []);
 
   // Define relevant categories (matching Shop.jsx logic)
   const categoryList = [

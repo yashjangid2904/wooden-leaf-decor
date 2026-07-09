@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { SlidersHorizontal, Search, X, Check, Plus, ShoppingBag } from "lucide-react";
 import { ProductDetailsModal } from "../ProductDetailsModal";
 import { Footer } from "../Footer";
 import { motion, AnimatePresence } from "motion/react";
 import { useCart } from "../../context/CartContext";
-import localProducts from "../data/products";
+import { supabase } from "../../lib/supabase";
 import { Helmet } from "react-helmet-async";
 
 // --- Minimal Floating Product Card Component ---
@@ -103,9 +103,24 @@ const WoodProductCard = ({ id, image, title, price, badge, category, onClick }) 
 };
 
 export function ShopPage() {
-  // Using local product data (no backend dependency)
-  const [products] = useState(localProducts);
-  const [loading] = useState(false);
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchProducts() {
+      setLoading(true);
+      const { data, error } = await supabase
+        .from('products')
+        .select('*')
+        .order('created_at', { ascending: false });
+      
+      if (!error && data) {
+        setProducts(data);
+      }
+      setLoading(false);
+    }
+    fetchProducts();
+  }, []);
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [priceRange, setPriceRange] = useState("all");
   const [selectedProduct, setSelectedProduct] = useState(null);
