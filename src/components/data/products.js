@@ -424,6 +424,16 @@ const products = [
     badge: "Trending",
     description:
       "Minimalist wall frame set with artistic patterns, perfect for enhancing modern living spaces."
+  },
+  {
+    id: 100,
+    image: "/WOODEN_BLOCKS/1.jpeg",
+    title: "Customizable Wooden Block with Stand",
+    price: 499,
+    category: "tabletop-accents",
+    badge: "Bestseller",
+    description:
+      "Individually handcrafted wooden blocks. Personalize with your own photo or text. Comes with a sleek, minimalist wooden stand to display your custom piece."
   }
 ];
 
